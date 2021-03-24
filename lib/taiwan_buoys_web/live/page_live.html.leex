@@ -1,0 +1,7 @@
+<h1>Please Select a Buoy</h1>
+<form phx-submit="view-buoy" phx-change="update-location">
+  <select name="location">
+    <%= options_for_select(@location_options, @location) %>
+  </select>
+  <button type="submit">View Buoy Graph</button>
+</form>
