@@ -17,25 +17,32 @@ import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
 import Chart from 'chart.js'
-import Moment from 'moment'
+
+Chart.defaults.global.defaultFontFamily = 'Cairo'
+Chart.defaults.global.defaultFontStyle = 'bold'
+
 
 let hooks = {}
-hooks.liveWaveBuoyChart = {
+hooks.BuoyChart = {
     mounted() {
-        var directions = []
-        var ctx = this.el.getContext('2d')
-        var waveChart = new Chart(ctx, {
+        var waveDirections = []
+        var waveCtx = document.getElementById('waveBuoyChart').getContext('2d');
+        var waveChart = new Chart(waveCtx, {
             type: 'line',
             data: {
                 labels: [],
                 datasets: [
                     {
+                    fill: true,
+                    backgroundColor: "rgba(206, 130, 92, 0.3)",
                     label: "Wave Height (meters)",
                     yAxisID: "wh",
                     data: [],
                     borderColor: "rgba(206, 130, 92, 1)"
                     },
                     {
+                    fill: true,
+                    backgroundColor: "rgba(178, 230, 157, 0.2)",
                     label: "Wave Period (seconds)",
                     yAxisID: "wp",
                     data: [],
@@ -64,7 +71,7 @@ hooks.liveWaveBuoyChart = {
                         },
                         ticks: {
                             callback: function(value, index, values) {
-                                return value + " " + directions[index]
+                                return value + " " + waveDirections[index]
                             }
                         }
                     }],
@@ -95,46 +102,25 @@ hooks.liveWaveBuoyChart = {
                 }
             }
         })
-
-        this.handleEvent("chart-data", (data) => {
-            console.log(data.data)
-            const waveHeights = data.data.map(x => {
-                return x.wave_height})
-            const wavePeriod = data.data.map(x => {
-                return x.wave_period})
-            const waveDirection = data.data.map(x => {
-                return x.wave_direction})
-            const dates = data.data.map(x => x.date_time)
-            waveChart.data.datasets[0].data = waveHeights
-            waveChart.data.datasets[1].data = wavePeriod
-            waveChart.data.labels = dates
-            directions = waveDirection
-            waveChart.update()
-        })
         
-        this.handleEvent("wave-chart-label", (chart_label) => {
-            waveChart.options.title.text = chart_label.label
-            waveChart.update()
-        })
-    }
-}
-
-hooks.liveWindBuoyChart = {
-    mounted() {
-        var directions = []
-        var ctx = this.el.getContext('2d')
-        var windChart = new Chart(ctx, {
+        var windDirections = []
+        var windCtx = document.getElementById('windBuoyChart').getContext('2d');
+        var windChart = new Chart(windCtx, {
             type: 'line',
             data: {
                 labels: [],
                 datasets: [
                     {
+                    fill: true,
+                    backgroundColor: "rgba(206, 130, 92, 0.3)",
                     label: "Wind Speed (meters/second)",
                     yAxisID: "ws",
                     data: [],
                     borderColor: "rgba(206, 130, 92, 1)"
                     },
                     {
+                    fill: true,
+                    backgroundColor: "rgba(178, 230, 157, 0.2)",
                     label: "Max Wind Speed (meter/second)",
                     yAxisID: "mws",
                     data: [],
@@ -160,7 +146,7 @@ hooks.liveWindBuoyChart = {
                         },
                         ticks: {
                             callback: function(value, index, values) {
-                                return value + " " + directions[index]
+                                return value + " " + windDirections[index]
                             }
                         }
                     }],
@@ -192,28 +178,50 @@ hooks.liveWindBuoyChart = {
             }
         })
 
+        
+        this.handleEvent("wind-chart-label", (chart_label) => {
+            windChart.options.title.text = chart_label.label
+            windChart.update()
+        })
+
         this.handleEvent("chart-data", (data) => {
-            console.log(data.data)
+            
+            const dates = data.data.map(x => x.date_time)
+
+            //update wind data
             const windSpeed = data.data.map(x => {
                 return x.mean_wind_speed})
             const maxWindSpeed = data.data.map(x => {
                 return x.maximum_wind})
             const windDirection = data.data.map(x => {
                 return x.wind_direction})
-            const dates = data.data.map(x => x.date_time)
             windChart.data.datasets[0].data = windSpeed
             windChart.data.datasets[1].data = maxWindSpeed
-            directions = windDirection
+            windDirections = windDirection
             windChart.data.labels = dates
             windChart.update()
+
+            //update wave data
+            const waveHeights = data.data.map(x => {
+                return x.wave_height})
+            const wavePeriod = data.data.map(x => {
+                return x.wave_period})
+            const waveDirection = data.data.map(x => {
+                return x.wave_direction})
+            waveChart.data.datasets[0].data = waveHeights
+            waveChart.data.datasets[1].data = wavePeriod
+            waveChart.data.labels = dates
+            waveDirections = waveDirection
+            waveChart.update()
         })
         
-        this.handleEvent("wind-chart-label", (chart_label) => {
-            windChart.options.title.text = chart_label.label
-            windChart.update()
+        this.handleEvent("wave-chart-label", (chart_label) => {
+            waveChart.options.title.text = chart_label.label
+            waveChart.update()
         })
     }
 }
+
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks})

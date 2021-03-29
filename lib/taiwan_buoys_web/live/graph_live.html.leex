@@ -6,10 +6,10 @@
       <br/>
       <button type="submit">View Buoy Graph</button>
     </form>
-    <div class="graph-container">
-        <canvas phx-hook="liveWaveBuoyChart" id="waveBuoyChart"></canvas>
+    <div class="graph-container" phx-hook="BuoyChart">
+        <canvas id="waveBuoyChart"></canvas>
     </div>
     <div class="graph-container">
-        <canvas phx-hook="liveWindBuoyChart" id="windBuoyChart"></canvas>
+        <canvas id="windBuoyChart"></canvas>
     </div>
 </div>

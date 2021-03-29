@@ -126,6 +126,7 @@ header {
 body {
   margin: 0;
   background-color: #bef9ff;
+  font-family: "Cairo", sans-serif;
 }
 
 section {
@@ -194,4 +195,23 @@ section .wave.wave4 {
   100% {
     background-position-x: -700px;
   }
+}
+
+select {
+  font-family: "Cairo", sans-serif;
+  border-color: rgba(46, 139, 232, 1);
+}
+
+button {
+  font-family: "Cairo", sans-serif;
+  background-color: rgba(46, 139, 232, 1);
+  border-color: rgba(46, 139, 232, 1);
+  transition: background-color 0.2s ease;
+  transition: border-color 0.2s ease;
+  transition: color 0.2s ease;
+}
+
+button:hover {
+  background-color: rgba(206, 130, 92, 1);
+  border-color: rgba(206, 130, 92, 1);
 }
