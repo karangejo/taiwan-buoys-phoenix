@@ -21,6 +21,11 @@ defmodule TaiwanBuoys.Tide do
     HTTPoison.get!(url, header)
   end
 
+  defp clean_date(datetime_string) do
+    {:ok, date_time, _} = DateTime.from_iso8601(datetime_string)
+    DateTime.shift_zone!(date_time, "Asia/Taipei")
+  end
+
   defp get_date_offset_from_today(offset) do
         Date.utc_today()
         |> Date.add(offset)
