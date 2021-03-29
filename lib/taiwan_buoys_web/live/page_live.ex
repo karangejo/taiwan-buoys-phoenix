@@ -2,7 +2,6 @@ defmodule TaiwanBuoysWeb.PageLive do
   use TaiwanBuoysWeb, :live_view
 
   alias TaiwanBuoys.Scraper
-  alias TaiwanBuoysWeb.GraphLive
 
   @impl true
   def mount(_params, _session, socket) do

@@ -8,17 +8,17 @@ defmodule TaiwanBuoys.Scraper do
   @buoy_urls [
     %{name: "taitung", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=WRA007"},
     %{name: "hualien", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46699A"},
-    %{name: "lanyu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6S94"},
-    %{name: "guishandao", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46708A"},
-    %{name: "suao", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46706A"},
-    %{name: "penghu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46735A"},
-    %{name: "matsu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6W08"},
-    %{name: "kinmen", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46787A"},
-    %{name: "xiaoliuqiu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46714D"},
-    %{name: "hsinchu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46757B"},
-    %{name: "luodong", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46694A"},
-    %{name: "fuguicape", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6AH2"},
-    %{name: "pengjiayu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6B01"}
+    #%{name: "lanyu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6S94"},
+    #%{name: "guishandao", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46708A"},
+    #%{name: "suao", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46706A"},
+    #%{name: "penghu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46735A"},
+    #%{name: "matsu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6W08"},
+    #%{name: "kinmen", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46787A"},
+    #%{name: "xiaoliuqiu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46714D"},
+    #%{name: "hsinchu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46757B"},
+    #%{name: "luodong", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46694A"},
+    #%{name: "fuguicape", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6AH2"},
+    #%{name: "pengjiayu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6B01"}
   ]
 
   def get_locations do
