@@ -44,7 +44,8 @@ defmodule TaiwanBuoys.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:wallaby, "~> 0.28.0"},
-      {:floki, "~> 0.30.0"}
+      {:floki, "~> 0.30.0"},
+      {:tz, "~> 0.12.0"}
     ]
   end
 

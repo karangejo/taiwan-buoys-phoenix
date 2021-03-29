@@ -17,26 +17,12 @@ defmodule TaiwanBuoys.Scraper do
     %{name: "xiaoliuqiu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46714D"},
     %{name: "hsinchu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46757B"},
     %{name: "luodong", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46694A"},
-    %{name: "fugui_cape", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6AH2"},
+    %{name: "fuguicape", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6AH2"},
     %{name: "pengjiayu", url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6B01"}
   ]
 
   def get_locations do
-    [
-      "taitung",
-      "hualien",
-      "lanyu",
-      "guishandao",
-      "suao",
-      "penghu",
-      "matsu",
-      "kinmen",
-      "xiaoliuqiu",
-      "hsinchu",
-      "luodong",
-      "fugui_cape",
-      "pengjiayu"
-    ]
+    Enum.map(@buoy_urls, fn x -> x.name end)
   end
 
   def get_rows(url) do
@@ -124,7 +110,7 @@ defmodule TaiwanBuoys.Scraper do
       |> Map.fetch!(:year)
     date = Date.new!(year, month, day)
     time = Time.new!(hour, minute, 0)
-    DateTime.new!(date, time)
+    DateTime.new!(date, time, "Asia/Taipei")
   end
 
   def get_all_buoy_data do

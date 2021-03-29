@@ -1,7 +1,11 @@
-<h1>Please Select a Buoy</h1>
-<form phx-submit="view-buoy" phx-change="update-location">
-  <select name="location">
-    <%= options_for_select(@location_options, @location) %>
-  </select>
-  <button type="submit">View Buoy Graph</button>
-</form>
+<div class="column">
+  <h1>Please Select a Buoy</h1>
+  <form phx-submit="view-buoy" phx-change="update-location">
+    <select name="location">
+      <%= options_for_select(@location_options, @location) %>
+    </select>
+    <br/>
+    <button type="submit">View Buoy Graph</button>
+  </form>
+  <iframe style="width: 95vw; height: 75vh" width="650" height="450" src="https://embed.windy.com/embed2.html?lat=25.048&lon=121.532&detailLat=25.048&detailLon=121.532&width=650&height=450&zoom=5&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>
+</div>

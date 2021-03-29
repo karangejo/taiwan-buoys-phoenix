@@ -32,7 +32,6 @@ defmodule TaiwanBuoys.BuoyDataServer do
 
   @impl true
   def handle_call({:put_data, data}, _from, _state) do
-    IO.inspect(data)
     {:reply, data, data }
   end
 
@@ -43,7 +42,7 @@ defmodule TaiwanBuoys.BuoyDataServer do
 
   @impl true
   def handle_call({:view_location_data, location}, _from, data) do
-    {:reply, data[location], data}
+    {:reply, Enum.take(data[location], 48), data}
   end
 
 end

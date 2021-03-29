@@ -14,8 +14,13 @@ defmodule TaiwanBuoys.ScraperServer do
   @impl true
   def init(_) do
     # Schedule work to be performed on start
-    Scraper.get_all_buoy_data()
-    |> BuoyDataServer.put_data()
+    case Scraper.get_all_buoy_data() do
+      [] ->
+        # if the data is empty then try again in 2 seconds
+        Process.send_after(self(), :work, :timer.seconds(5))
+      data ->
+        BuoyDataServer.put_data(data)
+    end
     schedule_work()
     {:ok, :ok}
   end
@@ -23,8 +28,13 @@ defmodule TaiwanBuoys.ScraperServer do
   @impl true
   def handle_info(:work, _) do
     # Do the desired work here
-    Scraper.get_all_buoy_data()
-    |> BuoyDataServer.put_data()
+    case Scraper.get_all_buoy_data() do
+      [] ->
+        # if the data is empty then try again in 2 seconds
+        Process.send_after(self(), :work, :timer.seconds(5))
+      data ->
+        BuoyDataServer.put_data(data)
+    end
     # Reschedule once more
     schedule_work()
 

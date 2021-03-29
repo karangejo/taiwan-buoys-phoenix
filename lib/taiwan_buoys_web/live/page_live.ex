@@ -9,7 +9,8 @@ defmodule TaiwanBuoysWeb.PageLive do
     locations =  Scraper.get_locations
     {:ok, socket
             |> assign(:location, hd locations )
-            |> assign(:location_options, locations)}
+            |> assign(:location_options, locations)
+          }
   end
 
   @impl true

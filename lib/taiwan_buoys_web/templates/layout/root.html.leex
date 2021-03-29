@@ -11,8 +11,17 @@
   </head>
   <body>
     <header>
-      <section class="container">
-      </section>
+    <div class="column">
+      <%= link to: Routes.page_path(@conn, :index) do %>
+        <img src="/images/lighthouse-transparent.png" alt="lighthouse logo" style="width: 200px; margin-top: 20px;"/>
+      <% end %>
+    <section>
+      <div class="wave wave1"></div>
+      <div class="wave wave2"></div>
+      <div class="wave wave3"></div>
+      <div class="wave wave4"></div>
+    </section>
+    </div>
     </header>
     <%= @inner_content %>
   </body>

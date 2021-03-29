@@ -1,5 +1,15 @@
-<h1>Graphs</h1>
-<h2>Buoy Graph For : <%= String.capitalize(@location) %></h2>
-<div style="width: 1000px; height: 600px;">
-    <canvas phx-hook="liveBuoyChart" id="buoyChart"></canvas>
+<div class="column">
+    <form phx-submit="view-buoy" phx-change="update-location">
+      <select name="location">
+        <%= options_for_select(@location_options, @location) %>
+      </select>
+      <br/>
+      <button type="submit">View Buoy Graph</button>
+    </form>
+    <div class="graph-container">
+        <canvas phx-hook="liveWaveBuoyChart" id="waveBuoyChart"></canvas>
+    </div>
+    <div class="graph-container">
+        <canvas phx-hook="liveWindBuoyChart" id="windBuoyChart"></canvas>
+    </div>
 </div>
