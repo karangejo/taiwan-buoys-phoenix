@@ -20,7 +20,7 @@ defmodule TaiwanBuoys.MixProject do
   def application do
     [
       mod: {TaiwanBuoys.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ex_unit]
     ]
   end
 
