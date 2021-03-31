@@ -32,16 +32,20 @@ defmodule TaiwanBuoys.Scraper do
   end
 
   def get_rows(url) do
-    {:ok, session} = Wallaby.start_session()
-    table_list =
-      session
-      |> Browser.visit(url)
-      |> Browser.page_source()
-      |> Floki.parse_document!()
-      |> Floki.find("tbody")
-    {"tbody", _, tbody} = hd table_list
-    #{"tr", _, rows} = hd tbody
-    tbody
+    case Wallaby.start_session() do
+      {:ok, session} ->
+        table_list =
+          session
+          |> Browser.visit(url)
+          |> Browser.page_source()
+          |> Floki.parse_document!()
+          |> Floki.find("tbody")
+        {"tbody", _, tbody} = hd table_list
+        #{"tr", _, rows} = hd tbody
+        tbody
+      _ ->
+        Process.sleep(2000)
+        get_rows(url)
   end
 
   def get_data_from_row(row) do
