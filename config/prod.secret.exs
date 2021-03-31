@@ -16,7 +16,8 @@ config :taiwan_buoys, TaiwanBuoysWeb.Endpoint,
     port: String.to_integer(System.get_env("PORT") || "5454"),
     transport_options: [socket_opts: [:inet6]]
   ],
-  secret_key_base: secret_key_base
+  secret_key_base: secret_key_base,
+  check_origin: false
 
 # ## Using releases (Elixir v1.9+)
 #
