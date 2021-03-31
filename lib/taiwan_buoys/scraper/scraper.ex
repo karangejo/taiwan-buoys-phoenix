@@ -46,6 +46,7 @@ defmodule TaiwanBuoys.Scraper do
       _ ->
         Process.sleep(2000)
         get_rows(url)
+    end
   end
 
   def get_data_from_row(row) do
