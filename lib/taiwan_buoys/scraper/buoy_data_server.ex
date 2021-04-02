@@ -40,8 +40,8 @@ defmodule TaiwanBuoys.BuoyDataServer do
   end
 
   @impl true
-  def handle_call({:put_data_location, location, data}, _from, _state) do
-    updated_data = %{data | location => data}
+  def handle_call({:put_data_location, location, data}, _from, current_data) do
+    updated_data = %{current_data | location => data}
     {:reply, updated_data, updated_data}
   end
 
