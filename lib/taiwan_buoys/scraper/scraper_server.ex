@@ -14,36 +14,23 @@ defmodule TaiwanBuoys.ScraperServer do
   @impl true
   def init(_) do
     # Schedule work to be performed on start
-    case Scraper.get_all_buoy_data() do
-      [] ->
-        # if the data is empty then try again in 2 seconds
-        Process.send_after(self(), :work, :timer.seconds(5))
-      data ->
-        BuoyDataServer.put_data(data)
-    end
+    Scraper.get_all_buoy_data()
     schedule_work()
+
     {:ok, :ok}
   end
 
   @impl true
   def handle_info(:work, _) do
     # Do the desired work here
-    case Scraper.get_all_buoy_data() do
-      [] ->
-        # if the data is empty then try again in 2 seconds
-        Process.send_after(self(), :work, :timer.seconds(5))
-      data ->
-        BuoyDataServer.put_data(data)
-    end
+    Scraper.get_all_buoy_data()
     # Reschedule once more
     schedule_work()
 
     {:noreply, :ok}
   end
 
-
   defp schedule_work do
     Process.send_after(self(), :work, :timer.minutes(30))
   end
-
 end
