@@ -8,11 +8,15 @@ defmodule TaiwanBuoys.BuoyDataServer do
   # Client
 
   def start_link(_) do
-    GenServer.start_link(__MODULE__, "", name: BuoyDataServer)
+    GenServer.start_link(__MODULE__, %{}, name: BuoyDataServer)
   end
 
   def put_data(data) do
     GenServer.call(BuoyDataServer, {:put_data, data})
+  end
+
+  def put_data_location(location, data) do
+    GenServer.call(BuoyDataServer, {:put_data_location, location, data})
   end
 
   def view_data do
@@ -32,7 +36,13 @@ defmodule TaiwanBuoys.BuoyDataServer do
 
   @impl true
   def handle_call({:put_data, data}, _from, _state) do
-    {:reply, data, data }
+    {:reply, data, data}
+  end
+
+  @impl true
+  def handle_call({:put_data_location, location, data}, _from, _state) do
+    updated_data = %{data | location => data}
+    {:reply, updated_data, updated_data}
   end
 
   @impl true
@@ -44,5 +54,4 @@ defmodule TaiwanBuoys.BuoyDataServer do
   def handle_call({:view_location_data, location}, _from, data) do
     {:reply, Enum.take(data[location], 48), data}
   end
-
 end

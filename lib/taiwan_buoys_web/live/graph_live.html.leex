@@ -6,6 +6,7 @@
       <br/>
       <button type="submit">View Buoy Graph</button>
     </form>
+    <p>Latitude: <%= @lat%> Longitude: <%= @lng %></p>
     <div class="graph-container" phx-hook="BuoyChart">
         <canvas id="waveBuoyChart"></canvas>
     </div>
