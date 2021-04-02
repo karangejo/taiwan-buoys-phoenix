@@ -10,6 +10,7 @@ use Mix.Config
 # Configures the endpoint
 config :taiwan_buoys, TaiwanBuoysWeb.Endpoint,
   url: [host: "localhost"],
+  http: [port: 5454]
   secret_key_base: "daCvMQAMkdG5YMZvKHOqfZJDRg0KKT12SA5qgn7QOIvgIY21cRXSRshQdaHJSX72",
   render_errors: [view: TaiwanBuoysWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TaiwanBuoys.PubSub,
