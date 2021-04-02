@@ -138,20 +138,20 @@ defmodule TaiwanBuoys.Scraper do
   end
 
   def get_buoy_data(location, url) do
-    buoy_data =
-      case get_rows(url) do
-        {:ok, rows} ->
+    case get_rows(url) do
+      {:ok, rows} ->
+        buoy_data =
           rows
           |> Enum.map(fn x ->
             {"tr", _, row} = x
             get_data_from_row(row)
           end)
 
-        {:error, _} ->
-          []
-      end
+        BuoyDataServer.put_data_location(location, buoy_data)
 
-    BuoyDataServer.put_data_location(location, buoy_data)
+      {:error, _} ->
+        []
+    end
   end
 
   def clean_row(row_list) do
