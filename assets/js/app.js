@@ -16,13 +16,13 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
-import Chart from 'chart.js'
+//import Chart from 'chart.js'
 
 Chart.defaults.global.defaultFontFamily = 'Cairo'
 Chart.defaults.global.defaultFontStyle = 'bold'
 
-
 let hooks = {}
+/*
 hooks.BuoyChart = {
     mounted() {
         var waveDirections = []
@@ -221,7 +221,7 @@ hooks.BuoyChart = {
         })
     }
 }
-
+*/
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks})
