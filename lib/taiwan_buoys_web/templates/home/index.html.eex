@@ -1,0 +1,12 @@
+<div class="column">
+  <h2>Please Select a Buoy</h2>
+  <%= form_for @conn, Routes.home_path(@conn, :redirect_chart) %>
+    <select name="location">
+      <%= options_for_select(@location_options, @location) %>
+    </select>
+
+    <br/>
+    <%= submit "View Buoy Graph" %>
+  </form>
+  <iframe style="width: 95vw; height: 75vh; margin-bottom: 30px;" width="650" height="450" src="https://embed.windy.com/embed2.html?lat=25.048&lon=121.532&detailLat=25.048&detailLon=121.532&width=650&height=450&zoom=5&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>
+</div>

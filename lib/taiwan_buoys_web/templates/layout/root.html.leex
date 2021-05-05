@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
-    <%= live_title_tag "TaiwanBuoys" %>
+    <%= live_title_tag "Taiwan Buoys" %>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
@@ -14,7 +14,7 @@
   <body>
     <header>
     <div class="column">
-      <%= link to: Routes.page_path(@conn, :index) do %>
+      <%= link to: Routes.home_path(@conn, :index) do %>
         <img src="/images/lighthouse-transparent.png" alt="lighthouse logo" style="width: 200px; margin-top: 20px;"/>
       <% end %>
     <section>

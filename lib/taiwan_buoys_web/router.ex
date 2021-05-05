@@ -17,8 +17,12 @@ defmodule TaiwanBuoysWeb.Router do
   scope "/", TaiwanBuoysWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
-    live "/graph/:location", GraphLive, :show
+    get "/", HomeController, :index
+    post "/view-chart", HomeController, :redirect_chart
+    get "/chart/:location", ChartController, :index
+
+    #live "/", PageLive, :index
+    #live "/graph/:location", GraphLive, :show
   end
 
   # Other scopes may use custom stacks.
