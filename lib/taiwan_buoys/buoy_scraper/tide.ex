@@ -13,12 +13,17 @@ defmodule TaiwanBuoys.Tide do
       |> URI.encode_query()
 
     header = %{
-      Authorization: System.fetch_env!("TIDE_API_KEY")
+      Authorization: System.fetch_env!("STORM_GLASS_API_KEY")
     }
 
     url = @base_url <> query
 
-    HTTPoison.get!(url, header)
+    res = HTTPoison.get!(url, header)
+    body = Jason.decode!(res.body)
+    data = body["data"]
+    Enum.map(data, fn x ->
+      %{x | "time" => clean_date(x["time"])}
+    end)
   end
 
   defp clean_date(datetime_string) do

@@ -4,7 +4,6 @@ defmodule TaiwanBuoys.ScraperServer do
   """
   use GenServer
 
-  alias TaiwanBuoys.BuoyDataServer
   alias TaiwanBuoys.Scraper
 
   def start_link(_) do
