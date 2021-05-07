@@ -3,6 +3,7 @@ defmodule TaiwanBuoysWeb.ChartController do
 
   alias TaiwanBuoys.BuoyDataServer
   alias TaiwanBuoys.Scraper
+  alias TaiwanBuoys.TideDataServer
 
   def index(conn, %{"location" => location}) do
     locations = Scraper.get_locations()
@@ -15,8 +16,10 @@ defmodule TaiwanBuoysWeb.ChartController do
      |> assign(:location, location)
      |> assign(:location_options, locations)
      |> assign(:data, BuoyDataServer.view_location_data(location))
+     |> assign(:tide_data, TideDataServer.view_location_data(location))
      |> assign(:wave_title, String.capitalize(location) <> " Wave Data For Last 48hrs")
      |> assign(:wind_title, String.capitalize(location) <> " Wind Data For Last 48hrs")
+     |> assign(:tide_title, String.capitalize(location) <> " Tide Data")
      |> render("index.html")
   end
 

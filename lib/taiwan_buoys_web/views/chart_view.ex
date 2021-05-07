@@ -1,6 +1,18 @@
 defmodule TaiwanBuoysWeb.ChartView do
   use TaiwanBuoysWeb, :view
 
+  def tide_height(tide_data) do
+    Enum.map(tide_data, fn x ->
+      x.height
+    end)
+  end
+
+  def tide_labels(tide_data) do
+    Enum.map(tide_data, fn x ->
+      x.time
+    end)
+  end
+
   def chart_labels(data) do
     Enum.map(data, fn x ->
       x.date_time
