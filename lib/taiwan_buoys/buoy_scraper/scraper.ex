@@ -5,6 +5,7 @@ defmodule TaiwanBuoys.Scraper do
 
   alias Wallaby.Browser
   alias TaiwanBuoys.BuoyDataServer
+  alias TaiwanBuoys.Scraper.BuoyData
 
   @buoy_urls [
     %{
@@ -167,62 +168,81 @@ defmodule TaiwanBuoys.Scraper do
 
   def get_data_from_row(row) do
     row
-    |> Enum.map(fn x -> Floki.text(x) end)
+    |> get_text()
     |> clean_row()
   end
+
+  def get_text(row) do
+    Enum.map(row, fn x -> Floki.text(x) end)
+  end
+
 
 
   def clean_row(row_list) do
     row_list
-    |> Enum.map(fn x ->
+    |> rm_spaces_new_lines()
+    |> label_and_clean()
+    |> Enum.into(%{})
+    |> to_buoy_data_struct()
+  end
+
+  def to_buoy_data_struct(row_map) do
+    struct(%BuoyData{}, row_map)
+  end
+
+  def rm_spaces_new_lines(row) do
+    Enum.map(row, fn x ->
       x
       |> String.replace("\n", "")
       |> String.replace(" ", "")
     end)
+  end
+
+  def label_and_clean(row) do
+    row
     |> Enum.with_index()
-    |> Enum.map(fn {elem, index} ->
-      case index do
-        0 ->
-          {:date_time, parse_date(elem)}
+    |> Enum.map( fn {elem, index} ->
+        case index do
+          0 ->
+            {:date_time, parse_date(elem)}
 
-        1 ->
-          {:tidal_height, elem}
+          1 ->
+            {:tidal_height, elem}
 
-        2 ->
-          {:wave_height, elem}
+          2 ->
+            {:wave_height, elem}
 
-        3 ->
-          {:wave_direction, half_string(elem)}
+          3 ->
+            {:wave_direction, half_string(elem)}
 
-        4 ->
-          {:wave_period, elem}
+          4 ->
+            {:wave_period, elem}
 
-        5 ->
-          {:mean_wind_speed, elem}
+          5 ->
+            {:mean_wind_speed, elem}
 
-        6 ->
-          {:wind_direction, half_string(elem)}
+          6 ->
+            {:wind_direction, half_string(elem)}
 
-        7 ->
-          {:maximum_wind, elem}
+          7 ->
+            {:maximum_wind, elem}
 
-        8 ->
-          {:water_temp_celcius, elem}
+          8 ->
+            {:water_temp_celcius, elem}
 
-        9 ->
-          {:air_temp_celcius, elem}
+          9 ->
+            {:air_temp_celcius, elem}
 
-        10 ->
-          {:pressure, elem}
+          10 ->
+            {:pressure, elem}
 
-        11 ->
-          {:current_direction, half_string(elem)}
+          11 ->
+            {:current_direction, half_string(elem)}
 
-        12 ->
-          {:current_speed, elem}
-      end
-    end)
-    |> Enum.into(%{})
+          12 ->
+            {:current_speed, elem}
+        end
+      end)
   end
 
   def half_string(str) do
