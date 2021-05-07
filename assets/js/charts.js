@@ -132,3 +132,53 @@ var windChart = new Chart(windCtx, {
     }
 })
 
+
+var tideCtx = document.getElementById('tideChart').getContext('2d');
+var tideChart = new Chart(tideCtx, {
+    type: 'line',
+    data: {
+        labels: tideLabels,
+        datasets: [
+            {
+                fill: true,
+                backgroundColor: "rgba(206, 130, 92, 0.3)",
+                label: "tide (meters)",
+                yAxisID: "td",
+                data: tideHeight,
+                borderColor: "rgba(206, 130, 92, 1)"
+            },
+        ]
+    },
+    options: {
+        resposive: true,
+        maintainAspectRatio: false,
+        title: {
+            display: true,
+            text: tideTitle
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        hour: 'MMM D h:mm a'
+                    },
+                    tooltipFormat: 'MMM D h:mm a'
+                }
+            }],
+            yAxes: [
+                {
+                    id: "td",
+                    type: "linear",
+                    position: "right",
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return value + " (m)"
+                        }
+                    }
+                },
+            ]
+        }
+    }
+})
