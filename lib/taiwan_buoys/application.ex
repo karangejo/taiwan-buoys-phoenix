@@ -16,7 +16,9 @@ defmodule TaiwanBuoys.Application do
       # Start a worker by calling: TaiwanBuoys.Worker.start_link(arg)
       # {TaiwanBuoys.Worker, arg}
       TaiwanBuoys.BuoyDataServer,
-      TaiwanBuoys.ScraperServer
+      TaiwanBuoys.ScraperServer,
+      TaiwanBuoys.TideDataServer,
+      TaiwanBuoys.TideServer
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
