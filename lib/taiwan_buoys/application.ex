@@ -18,7 +18,9 @@ defmodule TaiwanBuoys.Application do
       TaiwanBuoys.BuoyDataServer,
       TaiwanBuoys.ScraperServer,
       TaiwanBuoys.TideDataServer,
-      TaiwanBuoys.TideServer
+      TaiwanBuoys.TideServer,
+      TaiwanBuoys.WeatherDataServer,
+      TaiwanBuoys.WeatherServer
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
