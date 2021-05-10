@@ -18,6 +18,9 @@ defmodule TaiwanBuoysWeb.ChartView do
 
   def pred_wind_speed(pred_data) do
     Weather.get_noaa_values_by_attribute(pred_data,"windSpeed")
+    |> Enum.map(fn x ->
+      Float.to_string(x * 1.94384)
+    end)
   end
 
   def pred_wave_directions(pred_data) do

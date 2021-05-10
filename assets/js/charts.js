@@ -86,7 +86,7 @@ var windChart = new Chart(windCtx, {
             {
                 fill: true,
                 backgroundColor: "rgba(206, 130, 92, 0.3)",
-                label: "Wind Speed (meters/second)",
+                label: "Wind Speed (kts)",
                 yAxisID: "ws",
                 data: windSpeed,
                 borderColor: "rgba(206, 130, 92, 1)"
@@ -270,7 +270,7 @@ var windPredChart = new Chart(windPredCtx, {
             {
                 fill: true,
                 backgroundColor: "rgba(206, 130, 92, 0.3)",
-                label: "Wind Speed (meters/second)",
+                label: "Wind Speed (kts)",
                 yAxisID: "ws",
                 data: windPredSpeed,
                 borderColor: "rgba(206, 130, 92, 1)"
