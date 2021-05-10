@@ -33,6 +33,11 @@
   window.tideHeight = <%= raw(Jason.encode!(tide_height(@tide_data))) %>
   window.tideLabels = <%= raw(Jason.encode!(tide_labels(@tide_data))) %>
   window.tideTitle = "<%= raw(@tide_title) %>"
+  window.wavePredLabels = <%= raw(Jason.encode!(pred_chart_labels(@prediction_data))) %>
+  window.wavePredDirections = <%= raw(Jason.encode!(pred_wave_directions(@prediction_data))) %>
+  window.wavePredHeight = <%= raw(Jason.encode!(pred_wave_height(@prediction_data))) %>
+  window.wavePredPeriod = <%= raw(Jason.encode!(pred_wave_period(@prediction_data))) %>
+  window.wavePredTitle = "<%= raw(@wave_pred_title) %>"
 </script>
 
 <script src='<%= Routes.static_path(@conn, "/js/charts.js") %>' type="text/javascript"></script>

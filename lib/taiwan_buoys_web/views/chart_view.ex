@@ -1,6 +1,26 @@
 defmodule TaiwanBuoysWeb.ChartView do
   use TaiwanBuoysWeb, :view
 
+  alias TaiwanBuoys.Weather
+
+  def pred_chart_labels(pred_data) do
+    Enum.map(pred_data, fn %{"time" => value} ->
+      value
+    end)
+  end
+
+  def pred_wave_directions(pred_data) do
+    Weather.get_noaa_values_by_attribute(pred_data,"swellDirection")
+  end
+
+  def pred_wave_height(pred_data) do
+    Weather.get_noaa_values_by_attribute(pred_data,"swellHeight")
+  end
+
+  def pred_wave_period(pred_data) do
+    Weather.get_noaa_values_by_attribute(pred_data,"swellPeriod")
+  end
+
   def tide_height(tide_data) do
     Enum.map(tide_data, fn x ->
       x.height
