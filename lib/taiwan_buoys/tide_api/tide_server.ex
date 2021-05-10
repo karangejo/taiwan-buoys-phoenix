@@ -14,10 +14,24 @@ defmodule TaiwanBuoys.TideServer do
   @impl true
   def init(_) do
     # Schedule work to be performed on start
-    Tide.get_all_tide_data(&TideDataServer.put_data_location/2)
-    schedule_work()
-
+    Process.send(self(), :initialize, [])
     {:ok, :ok}
+  end
+
+  @impl true
+  def handle_info(:initialize, _) do
+    # Do the desired work here
+    case System.get_env("DEV_ENV") do
+      "local" ->
+        taitung_data = Tide.get_sample_taitung_data()
+        TideDataServer.put_data_location("taitung", taitung_data)
+      _ ->
+        Tide.get_all_tide_data(&TideDataServer.put_data_location/2)
+        # schedule work
+        schedule_work()
+    end
+
+    {:noreply, :ok}
   end
 
   @impl true

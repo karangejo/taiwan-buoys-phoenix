@@ -14,10 +14,23 @@ defmodule TaiwanBuoys.ScraperServer do
   @impl true
   def init(_) do
     # Schedule work to be performed on start
-    Scraper.get_all_buoy_data(&BuoyDataServer.put_data_location/2)
-    schedule_work()
-
+    Process.send(self(), :initialize, [])
     {:ok, :ok}
+  end
+
+  def handle_info(:initialize, _) do
+    # Do the desired work here
+    case System.get_env("DEV_ENV") do
+      "local" ->
+        taitung_data = Scraper.get_sample_taitung_data()
+        BuoyDataServer.put_data_location("taitung", taitung_data)
+      _ ->
+        Scraper.get_all_buoy_data(&BuoyDataServer.put_data_location/2)
+        # schedule work
+        schedule_work()
+    end
+
+    {:noreply, :ok}
   end
 
   @impl true

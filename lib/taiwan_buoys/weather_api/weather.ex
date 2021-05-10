@@ -25,9 +25,13 @@ defmodule TaiwanBuoys.Weather do
     |> Enum.map(fn x ->
       Process.sleep(5000)
 
-      data = get_weather_data_from_lat_long(x.latitude, x.longitude)
+      case get_weather_data_from_lat_long(x.latitude, x.longitude) do
+        [] ->
+          []
+        weather_data ->
+          persist_func.(x.name, weather_data)
+      end
 
-      persist_func.(x.name, data)
     end)
   end
 
@@ -44,20 +48,29 @@ defmodule TaiwanBuoys.Weather do
 
 
     url = @base_url <> query <> params
-    IO.inspect(url)
 
-    res = HTTPoison.get!(url, header)
-    body = Jason.decode!(res.body)
-    data = body["hours"]
+    case HTTPoison.get(url, header) do
+      {:ok, res} ->
+        body = Jason.decode!(res.body)
+        data = body["hours"]
 
-    Enum.map(data, fn x ->
-      %{x | "time" => clean_date(x["time"])}
-    end)
+        Enum.map(data, fn x ->
+          %{x | "time" => clean_date(x["time"])}
+        end)
+      {:error, _} ->
+        []
+    end
   end
 
   defp clean_date(datetime_string) do
     {:ok, date_time, _} = DateTime.from_iso8601(datetime_string)
     DateTime.shift_zone!(date_time, "Asia/Taipei")
+  end
+
+
+  def get_sample_taitung_data() do
+    File.read!("taitung_weather_data.txt")
+    |> :erlang.binary_to_term
   end
 
 end

@@ -10,11 +10,14 @@ defmodule TaiwanBuoys.Tide do
     |> Enum.map(fn x ->
       Process.sleep(5000)
 
-      data =
-        get_tide_data_from_lat_long(x.latitude, x.longitude)
-        |> Enum.map(fn x -> TideData.from_map(x) end)
+      case get_tide_data_from_lat_long(x.latitude, x.longitude) do
+        [] ->
+          []
+        tide_data ->
+          data = Enum.map(tide_data, fn x -> TideData.from_map(x) end)
+          persist_func.(x.name, data)
+      end
 
-      persist_func.(x.name, data)
     end)
   end
 
@@ -34,13 +37,17 @@ defmodule TaiwanBuoys.Tide do
 
     url = @base_url <> query
 
-    res = HTTPoison.get!(url, header)
-    body = Jason.decode!(res.body)
-    data = body["data"]
+    case HTTPoison.get(url, header) do
+      {:ok, res} ->
+        body = Jason.decode!(res.body)
+        data = body["data"]
 
-    Enum.map(data, fn x ->
-      %{x | "time" => clean_date(x["time"])}
-    end)
+        Enum.map(data, fn x ->
+          %{x | "time" => clean_date(x["time"])}
+        end)
+      {:error, _} ->
+        []
+    end
   end
 
   defp clean_date(datetime_string) do
@@ -52,6 +59,11 @@ defmodule TaiwanBuoys.Tide do
         Date.utc_today()
         |> Date.add(offset)
         |> Date.to_string()
+  end
+
+  def get_sample_taitung_data() do
+    File.read!("taitung_tide_data.txt")
+    |> :erlang.binary_to_term
   end
 
 

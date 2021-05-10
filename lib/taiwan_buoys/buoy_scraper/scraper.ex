@@ -265,4 +265,9 @@ defmodule TaiwanBuoys.Scraper do
     DateTime.new!(date, time, "Asia/Taipei")
   end
 
+  def get_sample_taitung_data() do
+    File.read!("taitung_buoy_data.txt")
+    |> :erlang.binary_to_term
+  end
+
 end
