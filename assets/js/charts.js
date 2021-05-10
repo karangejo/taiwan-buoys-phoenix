@@ -182,3 +182,136 @@ var tideChart = new Chart(tideCtx, {
         }
     }
 })
+
+var wavePredCtx = document.getElementById('wavePredChart').getContext('2d');
+var wavePredChart = new Chart(wavePredCtx, {
+    type: 'line',
+    data: {
+        labels: wavePredLabels,
+        datasets: [
+            {
+                fill: true,
+                backgroundColor: "rgba(178, 230, 157, 0.2)",
+                label: "Wave Period (seconds)",
+                yAxisID: "wp",
+                data: wavePredPeriod,
+                borderColor: "rgba(178, 250, 157, 1)"
+            },
+            {
+                fill: true,
+                backgroundColor: "rgba(206, 130, 92, 0.3)",
+                label: "Wave Height (meters)",
+                yAxisID: "wh",
+                data: wavePredHeight,
+                borderColor: "rgba(206, 130, 92, 1)"
+            },
+        ]
+    },
+    options: {
+        tooltips: {
+            mode: "label"
+        },
+        resposive: true,
+        maintainAspectRatio: false,
+        title: {
+            display: true,
+            text: wavePredTitle
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        hour: 'MMM D h:mm a'
+                    },
+                    tooltipFormat: 'MMM D h:mm a'
+                },
+                ticks: {
+                    callback: function (value, index, values) {
+                        return value + " " + wavePredDirections[index]
+                    }
+                }
+            }],
+            yAxes: [
+                {
+                    id: "wh",
+                    type: "linear",
+                    position: "right",
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return value + " (m)"
+                        }
+                    }
+                },
+                {
+                    id: "wp",
+                    type: "linear",
+                    position: "left",
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return value + " (s)"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+})
+
+
+var windPredCtx = document.getElementById('windPredChart').getContext('2d');
+var windPredChart = new Chart(windPredCtx, {
+    type: 'line',
+    data: {
+        labels: windPredLabels,
+        datasets: [
+            {
+                fill: true,
+                backgroundColor: "rgba(206, 130, 92, 0.3)",
+                label: "Wind Speed (meters/second)",
+                yAxisID: "ws",
+                data: windPredSpeed,
+                borderColor: "rgba(206, 130, 92, 1)"
+            },
+        ]
+    },
+    options: {
+        resposive: true,
+        maintainAspectRatio: false,
+        title: {
+            display: true,
+            text: windPredTitle
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        hour: 'MMM D h:mm a'
+                    },
+                    tooltipFormat: 'MMM D h:mm a'
+                },
+                ticks: {
+                    callback: function (value, index, values) {
+                        return value + " " + windPredDirections[index]
+                    }
+                }
+            }],
+            yAxes: [
+                {
+                    id: "ws",
+                    type: "linear",
+                    position: "right",
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return value + " (kts)"
+                        }
+                    }
+                },
+            ]
+        }
+    }
+})
