@@ -5,6 +5,7 @@ defmodule TaiwanBuoys.TideServer do
   use GenServer
 
   alias TaiwanBuoys.Tide
+  alias TaiwanBuoys.TideDataServer
 
   def start_link(_) do
     GenServer.start_link(__MODULE__, [], name: TideServer)
@@ -13,7 +14,7 @@ defmodule TaiwanBuoys.TideServer do
   @impl true
   def init(_) do
     # Schedule work to be performed on start
-    Tide.get_all_tide_data()
+    Tide.get_all_tide_data(&TideDataServer.put_data_location/2)
     schedule_work()
 
     {:ok, :ok}
@@ -22,7 +23,7 @@ defmodule TaiwanBuoys.TideServer do
   @impl true
   def handle_info(:work, _) do
     # Do the desired work here
-    Tide.get_all_tide_data()
+    Tide.get_all_tide_data(&TideDataServer.put_data_location/2)
     # Reschedule once more
     schedule_work()
 

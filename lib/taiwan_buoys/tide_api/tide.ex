@@ -1,12 +1,11 @@
 defmodule TaiwanBuoys.Tide do
 
   alias TaiwanBuoys.Scraper
-  alias TaiwanBuoys.TideDataServer
   alias TaiwanBuoys.Tide.TideData
 
   @base_url "https://api.stormglass.io/v2/tide/extremes/point?"
 
-  def get_all_tide_data() do
+  def get_all_tide_data(persist_func) do
     Scraper.get_locations_data()
     |> Enum.map(fn x ->
       Process.sleep(5000)
@@ -15,7 +14,7 @@ defmodule TaiwanBuoys.Tide do
         get_tide_data_from_lat_long(x.latitude, x.longitude)
         |> Enum.map(fn x -> TideData.from_map(x) end)
 
-      TideDataServer.put_data_location(x.name, data)
+      persist_func.(x.name, data)
     end)
   end
 

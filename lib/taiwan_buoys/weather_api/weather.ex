@@ -1,7 +1,6 @@
 defmodule TaiwanBuoys.Weather do
 
   alias TaiwanBuoys.Scraper
-  alias TaiwanBuoys.WeatherDataServer
 
   @base_url "https://api.stormglass.io/v2/weather/point?"
   @directions {"N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"}
@@ -11,20 +10,24 @@ defmodule TaiwanBuoys.Weather do
     elem(@directions, index)
   end
 
+  def get_noaa_values_by_attribute(data, attr_name) do
+    get_attribute_values_by_source(data, "noaa", attr_name)
+  end
+
   def get_attribute_values_by_source(data, source, attr_name) do
     Enum.map(data, fn %{^attr_name => %{^source => value}} ->
       value
     end)
   end
 
-  def get_all_weather_data() do
+  def get_all_weather_data(persist_func) do
     Scraper.get_locations_data()
     |> Enum.map(fn x ->
       Process.sleep(5000)
 
       data = get_weather_data_from_lat_long(x.latitude, x.longitude)
 
-      WeatherDataServer.put_data_location(x.name, data)
+      persist_func.(x.name, data)
     end)
   end
 

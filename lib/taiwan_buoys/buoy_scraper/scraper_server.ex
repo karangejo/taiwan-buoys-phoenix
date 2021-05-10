@@ -5,6 +5,7 @@ defmodule TaiwanBuoys.ScraperServer do
   use GenServer
 
   alias TaiwanBuoys.Scraper
+  alias TaiwanBuoys.BuoyDataServer
 
   def start_link(_) do
     GenServer.start_link(__MODULE__, [], name: ScraperServer)
@@ -13,7 +14,7 @@ defmodule TaiwanBuoys.ScraperServer do
   @impl true
   def init(_) do
     # Schedule work to be performed on start
-    Scraper.get_all_buoy_data()
+    Scraper.get_all_buoy_data(&BuoyDataServer.put_data_location/2)
     schedule_work()
 
     {:ok, :ok}
@@ -22,7 +23,7 @@ defmodule TaiwanBuoys.ScraperServer do
   @impl true
   def handle_info(:work, _) do
     # Do the desired work here
-    Scraper.get_all_buoy_data()
+    Scraper.get_all_buoy_data(&BuoyDataServer.put_data_location/2)
     # Reschedule once more
     schedule_work()
 

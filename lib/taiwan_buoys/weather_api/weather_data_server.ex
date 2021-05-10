@@ -8,23 +8,23 @@ defmodule TaiwanBuoys.WeatherDataServer do
   # Client
 
   def start_link(_) do
-    GenServer.start_link(__MODULE__, %{}, name: TideDataServer)
+    GenServer.start_link(__MODULE__, %{}, name: WeatherDataServer)
   end
 
   def put_data(data) do
-    GenServer.call(TideDataServer, {:put_data, data})
+    GenServer.call(WeatherDataServer, {:put_data, data})
   end
 
   def put_data_location(location, data) do
-    GenServer.call(TideDataServer, {:put_data_location, location, data})
+    GenServer.call(WeatherDataServer, {:put_data_location, location, data})
   end
 
   def view_data do
-    GenServer.call(TideDataServer, :view_data)
+    GenServer.call(WeatherDataServer, :view_data)
   end
 
   def view_location_data(location) do
-    GenServer.call(TideDataServer, {:view_location_data, location})
+    GenServer.call(WeatherDataServer, {:view_location_data, location})
   end
 
   # Server (callbacks)
