@@ -3,6 +3,42 @@ defmodule TaiwanBuoysWeb.ChartView do
 
   alias TaiwanBuoys.Weather
 
+  def filter_dates(date_time_list, num_hrs) do
+    date_time_list
+    |> Enum.with_index()
+    |> Enum.reduce([],  fn {value, index}, acc ->
+      case rem(index, num_hrs) do
+        0 ->
+          [value | acc]
+        _ ->
+          acc
+      end
+    end)
+  end
+
+
+  def colorize_by_day(date_time_list) do
+    date_time_list
+    |> Enum.map(fn date_time ->
+      case Calendar.ISO.day_of_week(date_time.year, date_time.month, date_time.day) do
+        1 ->
+          "blue"
+        2 ->
+          "green"
+        3 ->
+          "yellow"
+        4 ->
+          "orange"
+        5 ->
+          "red"
+        6 ->
+          "purple"
+        7 ->
+          "pink"
+      end
+    end)
+  end
+
   def pred_chart_labels(pred_data) do
     Enum.map(pred_data, fn %{"time" => value} ->
       value

@@ -6,21 +6,18 @@ var waveChart = new Chart(waveCtx, {
     data: {
         labels: waveLabels,
         datasets: [
-            {
-                fill: true,
-                backgroundColor: "rgba(178, 230, 157, 0.2)",
+            {                
+                borderColor: "rgba(206, 130, 92, 0.6)",
                 label: "Wave Period (seconds)",
                 yAxisID: "wp",
                 data: wavePeriod,
-                borderColor: "rgba(178, 250, 157, 1)"
+                pointBackgroundColor: buoyColor,
             },
             {
-                fill: true,
-                backgroundColor: "rgba(206, 130, 92, 0.3)",
                 label: "Wave Height (meters)",
                 yAxisID: "wh",
                 data: waveHeight,
-                borderColor: "rgba(206, 130, 92, 1)"
+                pointBackgroundColor: buoyColor,
             },
         ]
     },
@@ -85,11 +82,10 @@ var windChart = new Chart(windCtx, {
         datasets: [
             {
                 fill: true,
-                backgroundColor: "rgba(206, 130, 92, 0.3)",
                 label: "Wind Speed (kts)",
                 yAxisID: "ws",
                 data: windSpeed,
-                borderColor: "rgba(206, 130, 92, 1)"
+                pointBackgroundColor: buoyColor,
             },
         ]
     },
@@ -141,11 +137,10 @@ var tideChart = new Chart(tideCtx, {
         datasets: [
             {
                 fill: true,
-                backgroundColor: "rgba(206, 130, 92, 0.3)",
                 label: "tide (meters)",
                 yAxisID: "td",
                 data: tideHeight,
-                borderColor: "rgba(206, 130, 92, 1)"
+                pointBackgroundColor: tideColor,
             },
         ]
     },
@@ -187,23 +182,21 @@ var wavePredCtx = document.getElementById('wavePredChart').getContext('2d');
 var wavePredChart = new Chart(wavePredCtx, {
     type: 'line',
     data: {
-        labels: wavePredLabels,
+        labels: predLabels,
         datasets: [
             {
-                fill: true,
-                backgroundColor: "rgba(178, 230, 157, 0.2)",
+                borderColor: "rgba(206, 130, 92, 0.6)",
+                pointBackgroundColor: predColor,
                 label: "Wave Period (seconds)",
                 yAxisID: "wp",
                 data: wavePredPeriod,
-                borderColor: "rgba(178, 250, 157, 1)"
             },
             {
                 fill: true,
-                backgroundColor: "rgba(206, 130, 92, 0.3)",
                 label: "Wave Height (meters)",
                 yAxisID: "wh",
                 data: wavePredHeight,
-                borderColor: "rgba(206, 130, 92, 1)"
+                pointBackgroundColor: predColor,
             },
         ]
     },
@@ -265,15 +258,13 @@ var windPredCtx = document.getElementById('windPredChart').getContext('2d');
 var windPredChart = new Chart(windPredCtx, {
     type: 'line',
     data: {
-        labels: windPredLabels,
+        labels: predLabels,
         datasets: [
             {
-                fill: true,
-                backgroundColor: "rgba(206, 130, 92, 0.3)",
+                pointBackgroundColor: predColor,
                 label: "Wind Speed (kts)",
                 yAxisID: "ws",
                 data: windPredSpeed,
-                borderColor: "rgba(206, 130, 92, 1)"
             },
         ]
     },

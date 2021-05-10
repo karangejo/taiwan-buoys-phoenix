@@ -30,6 +30,7 @@
   window.waveDirections = <%= raw(Jason.encode!(wave_directions(@data))) %>
   window.waveHeight = <%= raw(Jason.encode!(wave_height(@data))) %>
   window.wavePeriod = <%= raw(Jason.encode!(wave_period(@data))) %>
+  window.buoyColor = <%= raw(Jason.encode!(colorize_by_day(chart_labels(@data)))) %>
   window.waveTitle = "<%= raw(@wave_title) %>"
   window.windLabels = <%= raw(Jason.encode!(chart_labels(@data))) %>
   window.windDirections = <%= raw(Jason.encode!(wind_directions(@data))) %>
@@ -38,13 +39,14 @@
   window.windTitle = "<%= raw(@wind_title) %>"
   window.tideHeight = <%= raw(Jason.encode!(tide_height(@tide_data))) %>
   window.tideLabels = <%= raw(Jason.encode!(tide_labels(@tide_data))) %>
+  window.tideColor = <%= raw(Jason.encode!(colorize_by_day(tide_labels(@tide_data)))) %>
   window.tideTitle = "<%= raw(@tide_title) %>"
-  window.wavePredLabels = <%= raw(Jason.encode!(pred_chart_labels(@prediction_data))) %>
+  window.predLabels = <%= raw(Jason.encode!(filter_dates(pred_chart_labels(@prediction_data), 3))) %>
+  window.predColor = <%= raw(Jason.encode!(colorize_by_day(filter_dates(pred_chart_labels(@prediction_data), 3)))) %>
   window.wavePredDirections = <%= raw(Jason.encode!(pred_wave_directions(@prediction_data))) %>
   window.wavePredHeight = <%= raw(Jason.encode!(pred_wave_height(@prediction_data))) %>
   window.wavePredPeriod = <%= raw(Jason.encode!(pred_wave_period(@prediction_data))) %>
   window.wavePredTitle = "<%= raw(@wave_pred_title) %>"
-  window.windPredLabels = <%= raw(Jason.encode!(pred_chart_labels(@prediction_data))) %>
   window.windPredDirections = <%= raw(Jason.encode!(pred_wind_directions(@prediction_data))) %>
   window.windPredSpeed = <%= raw(Jason.encode!(pred_wind_speed(@prediction_data))) %>
   window.windPredTitle = "<%= raw(@wind_pred_title) %>"
