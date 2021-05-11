@@ -19,8 +19,126 @@
     <div class="graph-container">
         <canvas id="windBuoyChart"></canvas>
     </div>
+    <h5>Buoy Data Table</h5>
+    <div id="buoyTable" style="overflow-x:auto; width: 75vw; height: 55vh">
+      <table>
+        <tr>
+          <th>
+             date time
+          </th>
+          <th>
+            tidal height (meters)
+          </th>
+          <th>
+            wave height (meters)
+          </th>
+          <th>
+            wave direction
+          </th>
+          <th>
+            wave period (seconds)
+          </th>
+          <th>
+            mean wind speed (meters/second)
+          </th>
+          <th>
+            wind direction
+          </th>
+          <th>
+            maximum wind (meters/second)
+          </th>
+          <th>
+            water temp celcius
+          </th>
+          <th>
+            air temp celcius
+          </th>
+          <th>
+            pressure
+          </th>
+          <th>
+            current direction
+          </th>
+          <th>
+            current speed (meters/second)
+          </th>
+        </tr>
+        <%= for row <- @data  do %>
+        <tr>
+          <td>
+             <%= row.date_time %>
+          </td>
+          <td>
+             <%= row.tidal_height %>
+          </td>
+          <td>
+             <%= row.wave_height %>
+          </td>
+          <td>
+             <%= row.wave_direction %>
+          </td>
+          <td>
+             <%= row.wave_period %>
+          </td>
+          <td>
+             <%= row.mean_wind_speed %>
+          </td>
+          <td>
+             <%= row.wind_direction %>
+          </td>
+          <td>
+             <%= row.maximum_wind %>
+          </td>
+          <td>
+             <%= row.water_temp_celcius %>
+          </td>
+          <td>
+             <%= row.air_temp_celcius %>
+          </td>
+          <td>
+             <%= row.pressure %>
+          </td>
+          <td>
+             <%= row.current_direction %>
+          </td>
+          <td>
+             <%= row.current_speed %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
     <div class="graph-container">
         <canvas id="tideChart"></canvas>
+    </div>
+    <h5>Tide Data Table</h5>
+    <div id="buoyTable" style="overflow-x:auto; width: 75vw; height: 55vh">
+      <table>
+        <tr>
+          <th>
+             date time
+          </th>
+          <th>
+            tidal height (meters)
+          </th>
+          <th>
+            tidal position
+          </th>
+        </tr>
+        <%= for row <- @tide_data  do %>
+        <tr>
+          <td>
+             <%= row.time %>
+          </td>
+          <td>
+             <%= Float.round(row.height, 2) %>
+          </td>
+          <td>
+             <%= row.type %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
     </div>
     <div class="graph-container">
         <canvas id="wavePredChart"></canvas>
