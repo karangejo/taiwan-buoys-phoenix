@@ -31,14 +31,16 @@ config :elixir, :time_zone_database, Tz.TimeZoneDatabase
 config :taiwan_buoys, TaiwanBuoys.Scheduler,
   jobs: [
     # every 30 minutes update buoys
-    {"*/30 * * * *", fn ->
-      TaiwanBuoys.Scraper.get_all_buoy_data(&TaiwanBuoys.BuoyDataServer.put_data_location/2)
-    end},
+    {"*/30 * * * *",
+      {TaiwanBuoys.Scraper, :get_all_buoy_data, [&TaiwanBuoys.BuoyDataServer.put_data_location/2]}
+    },
     # every day midnight update tides and weather forecast
-    {"0 0 * * *", fn ->
-      TaiwanBuoys.Tide.get_all_tide_data(&TaiwanBuoys.TideDataServer.put_data_location/2)
-      TaiwanBuoys.Weather.get_all_weather_data(&TaiwanBuoys.WeatherDataServer.put_data_location/2)
-    end}
+    {"0 0 * * *",
+      {TaiwanBuoys.Tide, :get_all_tide_data, [&TaiwanBuoys.TideDataServer.put_data_location/2]}
+    },
+    {"0 0 * * *",
+      {TaiwanBuoys.Weather, :get_all_weather_data, [&TaiwanBuoys.WeatherDataServer.put_data_location/2]}
+    }
   ]
 
 
