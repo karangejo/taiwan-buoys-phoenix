@@ -40,11 +40,16 @@ defmodule TaiwanBuoys.Tide do
     case HTTPoison.get(url, header) do
       {:ok, res} ->
         body = Jason.decode!(res.body)
-        data = body["data"]
+        case Map.has_key?(body, "errors") do
+          true ->
+            []
+          false ->
+            data = body["data"]
 
-        Enum.map(data, fn x ->
-          %{x | "time" => clean_date(x["time"])}
-        end)
+            Enum.map(data, fn x ->
+              %{x | "time" => clean_date(x["time"])}
+            end)
+        end
       {:error, _} ->
         []
     end

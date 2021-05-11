@@ -52,11 +52,16 @@ defmodule TaiwanBuoys.Weather do
     case HTTPoison.get(url, header) do
       {:ok, res} ->
         body = Jason.decode!(res.body)
-        data = body["hours"]
+        case Map.has_key?(body, "errors") do
+          true ->
+            []
+          false ->
+            data = body["hours"]
 
-        Enum.map(data, fn x ->
-          %{x | "time" => clean_date(x["time"])}
-        end)
+            Enum.map(data, fn x ->
+              %{x | "time" => clean_date(x["time"])}
+            end)
+        end
       {:error, _} ->
         []
     end
