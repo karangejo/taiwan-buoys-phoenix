@@ -3,6 +3,26 @@ defmodule TaiwanBuoysWeb.ChartView do
 
   alias TaiwanBuoys.Weather
 
+  def display_date_time(datetime) do
+    formated =
+      [datetime.year , datetime.month,  datetime.day,  datetime.hour]
+      |> Enum.map(fn x ->
+        Integer.to_string(x)
+      end)
+      |> Enum.join("-")
+
+    minute = Integer.to_string(datetime.minute)
+    formated_minute =
+      case minute |> String.length do
+        1 ->
+          minute <> "0"
+        _ ->
+          minute
+      end
+
+    formated <> ":" <> formated_minute
+  end
+
   def filter_dates(date_time_list, num_hrs) do
     date_time_list
     |> Enum.with_index()
