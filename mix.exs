@@ -46,7 +46,8 @@ defmodule TaiwanBuoys.MixProject do
       {:wallaby, "~> 0.28.0"},
       {:floki, "~> 0.30.0"},
       {:tz, "~> 0.12.0"},
-      {:httpoison, "~> 1.8"}
+      {:httpoison, "~> 1.8"},
+      {:quantum, "~> 3.0"}
     ]
   end
 

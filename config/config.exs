@@ -27,6 +27,20 @@ config :phoenix, :json_library, Jason
 # Timezones
 config :elixir, :time_zone_database, Tz.TimeZoneDatabase
 
+# Quantum jobs
+config :taiwan_buoys, TaiwanBuoys.Scheduler,
+  jobs: [
+    # every 30 minutes update buoys
+    {"*/30 * * * *", fn ->
+      TaiwanBuoys.Scraper.get_all_buoy_data(&TaiwanBuoys.BuoyDataServer.put_data_location/2)
+    end},
+    # every day midnight update tides and weather forecast
+    {"0 0 * * *", fn ->
+      TaiwanBuoys.Tide.get_all_tide_data(&TaiwanBuoys.TideDataServer.put_data_location/2)
+      TaiwanBuoys.Weather.get_all_weather_data(&TaiwanBuoys.WeatherDataServer.put_data_location/2)
+    end}
+  ]
+
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
