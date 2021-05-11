@@ -13,90 +13,90 @@ defmodule TaiwanBuoys.Scraper do
       longitude: 121.1442,
       latitude: 22.7242
     },
-    #%{
-      #name: "hualien",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46699A",
-      #longitude: 121.6325,
-      #latitude: 24.0311
-    #},
-    #%{
-      #name: "lanyu",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6S94",
-      #longitude: 121.5828,
-      #latitude: 22.0753
-    #},
-    #%{
-      #name: "guishandao",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46708A",
-      #longitude: 121.9256,
-      #latitude: 24.8469
-    #},
-    #%{
-      #name: "mituo",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=COMC08",
-      #longitude: 120.165,
-      #latitude: 22.7653
-    #},
-    #%{
-      #name: "suao",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46706A",
-      #longitude: 121.8761,
-      #latitude: 24.6256
-      #},
-      #%{
-      #name: "penghu",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46735A",
-      #longitude: 119.5519,
-      #latitude: 23.7283
-      #},
-      #%{
-      #name: "matsu",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6W08",
-      #longitude: 120.5153,
-      #latitude: 26.3525
-      #},
-      #%{
-      #name: "kinmen",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46787A",
-      #longitude: 118.4153,
-      #latitude: 24.3797
-      #},
-      #%{
-      #name: "erluanbi",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46759A",
-      #longitude: 120.8158,
-      #latitude: 21.9183
-      #},
-      #%{
-      #name: "xiaoliuqiu",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46714D",
-      #longitude: 120.3583,
-      #latitude: 22.3114
-      #},
-      #%{
-      #name: "hsinchu",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46757B",
-      #longitude: 120.8422,
-      #latitude: 24.7625
-      #},
-      #%{
-      #name: "longdong",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46694A",
-      #longitude: 121.9222,
-      #latitude: 25.0969
-      #},
-      #%{
-      #name: "fuguicape",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6AH2",
-      #longitude: 121.5336,
-      #latitude: 25.3036
-      #},
-      #%{
-      #name: "pengjiayu",
-      #url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6B01",
-      #longitude: 122.0588,
-      #latitude: 25.6049
-      #}
+    %{
+      name: "hualien",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46699A",
+      longitude: 121.6325,
+      latitude: 24.0311
+    },
+    %{
+      name: "lanyu",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6S94",
+      longitude: 121.5828,
+      latitude: 22.0753
+    },
+    %{
+      name: "guishandao",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46708A",
+      longitude: 121.9256,
+      latitude: 24.8469
+    },
+    %{
+      name: "mituo",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=COMC08",
+      longitude: 120.165,
+      latitude: 22.7653
+    },
+    %{
+      name: "suao",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46706A",
+      longitude: 121.8761,
+      latitude: 24.6256
+      },
+      %{
+      name: "penghu",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46735A",
+      longitude: 119.5519,
+      latitude: 23.7283
+      },
+      %{
+      name: "matsu",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6W08",
+      longitude: 120.5153,
+      latitude: 26.3525
+      },
+      %{
+      name: "kinmen",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46787A",
+      longitude: 118.4153,
+      latitude: 24.3797
+      },
+      %{
+      name: "erluanbi",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46759A",
+      longitude: 120.8158,
+      latitude: 21.9183
+      },
+      %{
+      name: "xiaoliuqiu",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46714D",
+      longitude: 120.3583,
+      latitude: 22.3114
+      },
+      %{
+      name: "hsinchu",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46757B",
+      longitude: 120.8422,
+      latitude: 24.7625
+      },
+      %{
+      name: "longdong",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=46694A",
+      longitude: 121.9222,
+      latitude: 25.0969
+      },
+      %{
+      name: "fuguicape",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6AH2",
+      longitude: 121.5336,
+      latitude: 25.3036
+      },
+      %{
+      name: "pengjiayu",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine_30day.html?MID=C6B01",
+      longitude: 122.0588,
+      latitude: 25.6049
+      }
   ]
 
   # Data accesors
