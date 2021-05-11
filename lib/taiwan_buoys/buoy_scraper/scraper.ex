@@ -4,7 +4,6 @@ defmodule TaiwanBuoys.Scraper do
   """
 
   alias Wallaby.Browser
-  alias TaiwanBuoys.BuoyDataServer
   alias TaiwanBuoys.Scraper.BuoyData
 
   @buoy_urls [
