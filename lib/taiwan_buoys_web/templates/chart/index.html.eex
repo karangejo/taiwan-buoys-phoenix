@@ -189,14 +189,14 @@
   window.tideLabels = <%= raw(Jason.encode!(tide_labels(@tide_data))) %>
   window.tideColor = <%= raw(Jason.encode!(colorize_by_day(tide_labels(@tide_data)))) %>
   window.tideTitle = "<%= raw(@tide_title) %>"
-  window.predLabels = <%= raw(Jason.encode!(filter_dates(pred_chart_labels(@prediction_data), 3))) %>
-  window.predColor = <%= raw(Jason.encode!(colorize_by_day(filter_dates(pred_chart_labels(@prediction_data), 3)))) %>
-  window.wavePredDirections = <%= raw(Jason.encode!(pred_wave_directions(@prediction_data))) %>
-  window.wavePredHeight = <%= raw(Jason.encode!(pred_wave_height(@prediction_data))) %>
-  window.wavePredPeriod = <%= raw(Jason.encode!(pred_wave_period(@prediction_data))) %>
+  window.predLabels = <%= raw(Jason.encode!(filter_dates(pred_chart_labels(@prediction_data), 6))) %>
+  window.predColor = <%= raw(Jason.encode!(colorize_by_day(filter_dates(pred_chart_labels(@prediction_data), 6)))) %>
+  window.wavePredDirections = <%= raw(Jason.encode!(filter_dates(pred_wave_directions(@prediction_data), 6))) %>
+  window.wavePredHeight = <%= raw(Jason.encode!(filter_dates(pred_wave_height(@prediction_data), 6))) %>
+  window.wavePredPeriod = <%= raw(Jason.encode!(filter_dates(pred_wave_period(@prediction_data), 6))) %>
   window.wavePredTitle = "<%= raw(@wave_pred_title) %>"
-  window.windPredDirections = <%= raw(Jason.encode!(pred_wind_directions(@prediction_data))) %>
-  window.windPredSpeed = <%= raw(Jason.encode!(pred_wind_speed(@prediction_data))) %>
+  window.windPredDirections = <%= raw(Jason.encode!(filter_dates(pred_wind_directions(@prediction_data), 6))) %>
+  window.windPredSpeed = <%= raw(Jason.encode!(filter_dates(pred_wind_speed(@prediction_data), 6))) %>
   window.windPredTitle = "<%= raw(@wind_pred_title) %>"
 </script>
 

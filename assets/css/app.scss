@@ -228,6 +228,18 @@ td, th {
   text-align: center;
 }
 
+tr td:first-child {
+  position: sticky;
+  left: 0;
+  background: #bce8f1;
+  border-radius: 7px;
+}
+
+table tr th:first-child {
+  left: 0;
+  z-index: 1;
+}
+
 .tab-container {
   display: flex;
   flex-direction: column;
