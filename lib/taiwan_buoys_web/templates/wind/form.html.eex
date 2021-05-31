@@ -1,0 +1,23 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :email, "Notify me at this email:"%>
+  <%= text_input f, :email %>
+  <%= error_tag f, :email %>
+
+  <%= label f, :kts_greater_than, "If the wind speed (in knots) is greater than:" %>
+  <%= number_input f, :kts_greater_than %>
+  <%= error_tag f, :kts_greater_than %>
+
+  <%= label f, :location, "At this location:" %>
+  <%= select f, :location, @location_options %>
+  <%= error_tag f, :location %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

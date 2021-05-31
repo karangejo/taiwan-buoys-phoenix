@@ -1,0 +1,23 @@
+<h1>Show Wind</h1>
+
+<ul>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @wind.email %>
+  </li>
+
+  <li>
+    <strong>Kts greater than:</strong>
+    <%= @wind.kts_greater_than %>
+  </li>
+
+  <li>
+    <strong>Location</strong>
+    <%= @wind.location %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.wind_path(@conn, :edit, @wind) %></span>
+<span><%= link "Back", to: Routes.wind_path(@conn, :index) %></span>

@@ -1,0 +1,5 @@
+<h1>Edit Wave</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.wave_path(@conn, :update, @wave)) %>
+
+<span><%= link "Back", to: Routes.wave_path(@conn, :index) %></span>

@@ -1,0 +1,5 @@
+<h1>New Wave Email Notification</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.wave_path(@conn, :create)) %>
+
+<span><%= link "Back", to: Routes.home_path(@conn, :index) %></span>

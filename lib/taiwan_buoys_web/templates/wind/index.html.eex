@@ -1,0 +1,30 @@
+<h1>Listing Winds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Kts greater than</th>
+      <th>Location</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for wind <- @winds do %>
+    <tr>
+      <td><%= wind.email %></td>
+      <td><%= wind.kts_greater_than %></td>
+      <td><%= wind.location %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.wind_path(@conn, :show, wind) %></span>
+        <span><%= link "Edit", to: Routes.wind_path(@conn, :edit, wind) %></span>
+        <span><%= link "Delete", to: Routes.wind_path(@conn, :delete, wind), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Wind", to: Routes.wind_path(@conn, :new) %></span>

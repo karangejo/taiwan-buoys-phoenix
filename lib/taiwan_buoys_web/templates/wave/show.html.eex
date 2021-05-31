@@ -1,0 +1,23 @@
+<h1>Show Wave</h1>
+
+<ul>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @wave.email %>
+  </li>
+
+  <li>
+    <strong>Swell greater than:</strong>
+    <%= @wave.swell_greater_than %>
+  </li>
+
+  <li>
+    <strong>Location</strong>
+    <%= @wave.location %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.wave_path(@conn, :edit, @wave) %></span>
+<span><%= link "Back", to: Routes.wave_path(@conn, :index) %></span>
