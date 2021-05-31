@@ -7,6 +7,15 @@
 # General application configuration
 use Mix.Config
 
+config :taiwan_buoys, TaiwanBuoys.Repo,
+  database: "taiwan_buoys_repo",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost"
+
+config :taiwan_buoys,
+      ecto_repos: [TaiwanBuoys.Repo]
+
 # Configures the endpoint
 config :taiwan_buoys, TaiwanBuoysWeb.Endpoint,
   url: [host: "localhost"],
@@ -32,7 +41,7 @@ config :taiwan_buoys, TaiwanBuoys.Scheduler,
   jobs: [
     # every 30 minutes update buoys
     {"*/30 * * * *",
-      {TaiwanBuoys.Scraper, :get_all_buoy_data, [&TaiwanBuoys.BuoyDataServer.put_data_location/2]}
+      {TaiwanBuoys.Scraper, :get_all_buoy_data, [&TaiwanBuoys.BuoyDataServer.put_data_location/2, &TaiwanBuoys.Email.check_wave_notifications/2, &TaiwanBuoys.Email.check_wind_notifications/2]}
     },
     # every day midnight update tides and weather forecast
     {"0 0 * * *",
