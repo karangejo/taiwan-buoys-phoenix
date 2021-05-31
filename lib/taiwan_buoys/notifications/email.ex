@@ -13,6 +13,10 @@ defmodule TaiwanBuoys.Email do
   alias TaiwanBuoys.Notifications.Wind
   alias TaiwanBuoys.Scraper.BuoyData
 
+  def ms_to_kts(ms_string) do
+    Float.to_string(String.to_float(ms_string) * 1.94384)
+  end
+
   def delete_wind_link(wind) do
     @taiwanbuoys_url <> TaiwanBuoysWeb.Router.Helpers.wind_path(TaiwanBuoysWeb.Endpoint, :delete, wind)
   end
@@ -71,9 +75,18 @@ defmodule TaiwanBuoys.Email do
   def wave_email_template(loc, %BuoyData{} = params, %Wave{} = wave) do
     """
     Just letting you know the current conditions for the #{loc} buoy at #{params.date_time}:
-    Wave Height: #{params.wave_height}
-    Wave Period: #{params.wave_period}
+    Wave Height: #{params.wave_height} (m)
+    Wave Period: #{params.wave_period} (s)
     Wave Direction: #{params.wave_direction}
+    Wind Speed: #{ms_to_kts(params.mean_wind_speed)} (kts)
+    Wind Max Speed: #{ms_to_kts(params.maximum_wind)} (kts)
+    Wind Direction: #{params.wind_direction}
+    Tide Height: #{params.tidal_height} (m)
+    Water Temp: #{params.water_temp_celcius} (c)
+    Pressure: #{params.pressure}
+    Air Temp: #{params.air_temp_celcius} (c)
+    Current Speed: #{ms_to_kts(params.current_speed)} (kts)
+    Current Direction: #{params.current_direction}
 
     If you do not want to receive any more of these notifications please unsubscribe by following the link below:
     #{delete_wave_link(wave)}
@@ -83,8 +96,19 @@ defmodule TaiwanBuoys.Email do
   def wind_email_template(loc, %BuoyData{} = params, %Wind{} = wind) do
     """
     Just letting you know the current conditions for the #{loc} buoy at #{params.date_time}:
-    Wind Speed: #{params.mean_wind_speed}
+    Wave Height: #{params.wave_height} (m)
+    Wave Period: #{params.wave_period} (s)
+    Wave Direction: #{params.wave_direction}
+    Wind Speed: #{ms_to_kts(params.mean_wind_speed)} (kts)
+    Wind Max Speed: #{ms_to_kts(params.maximum_wind)} (kts)
     Wind Direction: #{params.wind_direction}
+    Tide Height: #{params.tidal_height} (m)
+    Water Temp: #{params.water_temp_celcius} (c)
+    Pressure: #{params.pressure}
+    Air Temp: #{params.air_temp_celcius} (c)
+    Current Direction: #{params.current_direction}
+    Current Speed: #{ms_to_kts(params.current_speed)} (kts)
+    Current Direction: #{params.current_direction}
 
     If you do not want to receive any more of these notifications please unsubscribe by following the link below:
     #{delete_wind_link(wind)}
