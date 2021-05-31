@@ -115,14 +115,14 @@ defmodule TaiwanBuoys.Scraper do
 
 
   # Scraper
-  def get_all_buoy_data(persist_func) do
+  def get_all_buoy_data(persist_func, wave_notify_func, wind_notify_func) do
     Enum.map(@buoy_urls, fn x ->
       Process.sleep(5000)
-      get_buoy_data(x.name, x.url, persist_func)
+      get_buoy_data(x.name, x.url, persist_func, wave_notify_func, wind_notify_func)
     end)
   end
 
-  def get_buoy_data(location, url, persist_func) do
+  def get_buoy_data(location, url, persist_func, wave_notify_func, wind_notify_func) do
     case get_rows(url) do
       {:ok, rows} ->
         buoy_data =
@@ -132,9 +132,22 @@ defmodule TaiwanBuoys.Scraper do
             get_data_from_row(row)
           end)
 
+        latest_row = get_latest_row(buoy_data)
+        wave_notify_func.(location, latest_row)
+        wind_notify_func.(location, latest_row)
         persist_func.(location, buoy_data)
+        buoy_data
       {:error, _} ->
         []
+    end
+  end
+
+  def get_latest_row(data) do
+    [first_row = %BuoyData{} | rem_data] = data
+    if first_row.wave_height == "-" or first_row.mean_wind_speed == "-" do
+      get_latest_row(rem_data)
+    else
+      first_row
     end
   end
 

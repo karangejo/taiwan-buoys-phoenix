@@ -41,13 +41,11 @@ defmodule TaiwanBuoys.WeatherDataServer do
   def handle_continue(:initialize, current_data) do
       case System.get_env("DEV_ENV") do
         "local" ->
-          IO.inspect("Local Data")
           buoy_data = Weather.get_sample_taitung_data()
           updated_data = Map.put(current_data, "taitung", buoy_data)
           {:noreply, updated_data }
 
         _ ->
-          IO.inspect("Getting Data")
           Task.start(fn -> Weather.get_all_weather_data(&__MODULE__.put_data_location/2) end)
 
           updated_data =

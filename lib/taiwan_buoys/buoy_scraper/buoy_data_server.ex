@@ -6,6 +6,7 @@ defmodule TaiwanBuoys.BuoyDataServer do
   use GenServer
 
   alias TaiwanBuoys.Scraper
+  alias TaiwanBuoys.Email
 
   # Client
 
@@ -40,14 +41,12 @@ defmodule TaiwanBuoys.BuoyDataServer do
   def handle_continue(:initialize, current_data) do
       case System.get_env("DEV_ENV") do
         "local" ->
-          IO.inspect("Local Data")
           buoy_data = Scraper.get_sample_taitung_data()
           updated_data = Map.put(current_data, "taitung", buoy_data)
           {:noreply, updated_data }
 
         _ ->
-          IO.inspect("Getting Data")
-          Task.start(fn -> Scraper.get_all_buoy_data(&__MODULE__.put_data_location/2) end)
+          Task.start(fn -> Scraper.get_all_buoy_data(&__MODULE__.put_data_location/2, &Email.check_wave_notifications/2, &Email.check_wind_notifications/2) end)
 
           updated_data =
             Enum.map(Scraper.get_locations, fn x ->
