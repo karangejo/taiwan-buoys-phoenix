@@ -2,8 +2,8 @@ defmodule TaiwanBuoys.Email do
 
   @wave_wait_period 24
   @wind_wait_period 24
-  #@taiwanbuoys_url "https://taiwanbuoys.com"
-  @taiwanbuoys_url "http://localhost:4000"
+  @taiwanbuoys_url "https://taiwanbuoys.com"
+  #@taiwanbuoys_url "http://localhost:4000"
   @welcome_subject "Hello From Taiwan Buoys!"
   @notification_subject "Notification From Taiwan Buoys!"
 
