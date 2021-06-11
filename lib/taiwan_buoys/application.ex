@@ -7,6 +7,7 @@ defmodule TaiwanBuoys.Application do
 
   def start(_type, _args) do
     children = [
+      TaiwanBuoys.Repo,
       # Start the Telemetry supervisor
       TaiwanBuoysWeb.Telemetry,
       # Start the PubSub system
