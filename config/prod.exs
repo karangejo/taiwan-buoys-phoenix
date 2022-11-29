@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
@@ -15,6 +15,25 @@ config :taiwan_buoys, TaiwanBuoysWeb.Endpoint,
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+# Quantum jobs
+config :taiwan_buoys, TaiwanBuoys.Scheduler,
+  jobs: [
+    # every 30 minutes update buoys
+    {"*/30 * * * *",
+     {TaiwanBuoys.Scraper, :get_all_buoy_data,
+      [
+        &TaiwanBuoys.BuoyDataServer.put_data_location/2,
+        &TaiwanBuoys.Email.check_wave_notifications/2,
+        &TaiwanBuoys.Email.check_wind_notifications/2
+      ]}},
+    # every day midnight update tides and weather forecast
+    {"0 0 * * *",
+     {TaiwanBuoys.Tide, :get_all_tide_data, [&TaiwanBuoys.TideDataServer.put_data_location/2]}},
+    {"0 0 * * *",
+     {TaiwanBuoys.Weather, :get_all_weather_data,
+      [&TaiwanBuoys.WeatherDataServer.put_data_location/2]}}
+  ]
 
 # ## SSL Support
 #

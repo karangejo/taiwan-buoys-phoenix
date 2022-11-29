@@ -1,12 +1,12 @@
 defmodule TaiwanBuoys.Weather do
-
-  alias TaiwanBuoys.Scraper
+  alias TaiwanBuoys.DataSources
 
   @base_url "https://api.stormglass.io/v2/weather/point?"
-  @directions {"N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"}
+  @directions {"N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W",
+               "WNW", "NW", "NNW", "N"}
 
   def degrees_to_direction(degree) do
-    index = round(degree/22.5)
+    index = round(degree / 22.5)
     elem(@directions, index)
   end
 
@@ -21,17 +21,17 @@ defmodule TaiwanBuoys.Weather do
   end
 
   def get_all_weather_data(persist_func) do
-    Scraper.get_locations_data()
+    DataSources.buoy_data()
     |> Enum.map(fn x ->
       Process.sleep(5000)
 
       case get_weather_data_from_lat_long(x.latitude, x.longitude) do
         [] ->
           []
+
         weather_data ->
           persist_func.(x.name, weather_data)
       end
-
     end)
   end
 
@@ -44,17 +44,19 @@ defmodule TaiwanBuoys.Weather do
       Authorization: System.fetch_env!("STORM_GLASS_API_KEY")
     }
 
-    params = "&params=swellDirection,swellHeight,swellPeriod,waveDirection,waveHeight,wavePeriod,windDirection,windSpeed,windWaveHeight,windWaveDirection,windWavePeriod"
-
+    params =
+      "&params=swellDirection,swellHeight,swellPeriod,waveDirection,waveHeight,wavePeriod,windDirection,windSpeed,windWaveHeight,windWaveDirection,windWavePeriod"
 
     url = @base_url <> query <> params
 
     case HTTPoison.get(url, header) do
       {:ok, res} ->
         body = Jason.decode!(res.body)
+
         case Map.has_key?(body, "errors") do
           true ->
             []
+
           false ->
             data = body["hours"]
 
@@ -62,6 +64,7 @@ defmodule TaiwanBuoys.Weather do
               %{x | "time" => clean_date(x["time"])}
             end)
         end
+
       {:error, _} ->
         []
     end
@@ -72,10 +75,8 @@ defmodule TaiwanBuoys.Weather do
     DateTime.shift_zone!(date_time, "Asia/Taipei")
   end
 
-
   def get_sample_taitung_data() do
     File.read!("taitung_weather_data.txt")
-    |> :erlang.binary_to_term
+    |> :erlang.binary_to_term()
   end
-
 end

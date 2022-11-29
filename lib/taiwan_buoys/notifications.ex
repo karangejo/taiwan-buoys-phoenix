@@ -23,8 +23,9 @@ defmodule TaiwanBuoys.Notifications do
 
   def list_winds_by_location(location) do
     query =
-      from w in Wind,
-      where: w.location == ^location
+      from(w in Wind,
+        where: w.location == ^location
+      )
 
     Repo.all(query)
   end
@@ -59,6 +60,7 @@ defmodule TaiwanBuoys.Notifications do
   """
   def create_wind(attrs \\ %{}) do
     attrs = Map.put(attrs, "last_notification", DateTime.utc_now() |> DateTime.add(-86400))
+
     %Wind{}
     |> Wind.changeset(attrs)
     |> Repo.insert()
@@ -128,8 +130,9 @@ defmodule TaiwanBuoys.Notifications do
 
   def list_waves_by_location(location) do
     query =
-      from w in Wave,
-      where: w.location == ^location
+      from(w in Wave,
+        where: w.location == ^location
+      )
 
     Repo.all(query)
   end
@@ -164,6 +167,7 @@ defmodule TaiwanBuoys.Notifications do
   """
   def create_wave(attrs \\ %{}) do
     attrs = Map.put(attrs, "last_notification", DateTime.utc_now() |> DateTime.add(-86400))
+
     %Wave{}
     |> Wave.changeset(attrs)
     |> Repo.insert()

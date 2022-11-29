@@ -1,4 +1,13 @@
-use Mix.Config
+import Config
+
+# Configure your database
+config :taiwan_buoys, Quizzaz.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "taiwan_buoys_dev",
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -12,13 +21,8 @@ config :taiwan_buoys, TaiwanBuoysWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
-      cd: Path.expand("../assets", __DIR__)
-    ]
+    esbuild:
+      {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch --loader:.png=file)]}
   ]
 
 # ## SSL Support

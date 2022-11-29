@@ -3,10 +3,10 @@ defmodule TaiwanBuoys.Notifications.Wave do
   import Ecto.Changeset
 
   schema "waves" do
-    field :email, :string
-    field :swell_greater_than, :float
-    field :location, :string
-    field :last_notification, :utc_datetime
+    field(:email, :string)
+    field(:swell_greater_than, :float)
+    field(:location, :string)
+    field(:last_notification, :utc_datetime)
 
     timestamps()
   end

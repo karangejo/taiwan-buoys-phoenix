@@ -5,7 +5,7 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :taiwan_buoys, TaiwanBuoys.Repo,
   database: "taiwan_buoys_repo",
@@ -14,7 +14,7 @@ config :taiwan_buoys, TaiwanBuoys.Repo,
   hostname: "localhost"
 
 config :taiwan_buoys,
-      ecto_repos: [TaiwanBuoys.Repo]
+  ecto_repos: [TaiwanBuoys.Repo]
 
 # Configures the endpoint
 config :taiwan_buoys, TaiwanBuoysWeb.Endpoint,
@@ -24,6 +24,15 @@ config :taiwan_buoys, TaiwanBuoysWeb.Endpoint,
   render_errors: [view: TaiwanBuoysWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TaiwanBuoys.PubSub,
   live_view: [signing_salt: "sTrRiaFM"]
+
+# Configure esbuild (the version is required)
+config :esbuild,
+  version: "0.12.18",
+  default: [
+    args: ~w(js/app.js js/charts.js --bundle --target=es2016 --outdir=../priv/static/assets),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -35,23 +44,6 @@ config :phoenix, :json_library, Jason
 
 # Timezones
 config :elixir, :time_zone_database, Tz.TimeZoneDatabase
-
-# Quantum jobs
-config :taiwan_buoys, TaiwanBuoys.Scheduler,
-  jobs: [
-    # every 30 minutes update buoys
-    {"*/30 * * * *",
-      {TaiwanBuoys.Scraper, :get_all_buoy_data, [&TaiwanBuoys.BuoyDataServer.put_data_location/2, &TaiwanBuoys.Email.check_wave_notifications/2, &TaiwanBuoys.Email.check_wind_notifications/2]}
-    },
-    # every day midnight update tides and weather forecast
-    {"0 0 * * *",
-      {TaiwanBuoys.Tide, :get_all_tide_data, [&TaiwanBuoys.TideDataServer.put_data_location/2]}
-    },
-    {"0 0 * * *",
-      {TaiwanBuoys.Weather, :get_all_weather_data, [&TaiwanBuoys.WeatherDataServer.put_data_location/2]}
-    }
-  ]
-
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

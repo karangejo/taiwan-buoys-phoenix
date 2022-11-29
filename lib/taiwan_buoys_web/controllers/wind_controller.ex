@@ -3,7 +3,7 @@ defmodule TaiwanBuoysWeb.WindController do
 
   alias TaiwanBuoys.Notifications
   alias TaiwanBuoys.Notifications.Wind
-  alias TaiwanBuoys.Scraper
+  alias TaiwanBuoys.DataSources
   alias TaiwanBuoys.Email
 
   def index(conn, _params) do
@@ -13,7 +13,7 @@ defmodule TaiwanBuoysWeb.WindController do
 
   def new(conn, _params) do
     changeset = Notifications.change_wind(%Wind{})
-    locations =  Scraper.get_locations
+    locations = DataSources.get_locations()
     render(conn, "new.html", changeset: changeset, location_options: locations)
   end
 
@@ -21,12 +21,16 @@ defmodule TaiwanBuoysWeb.WindController do
     case Notifications.create_wind(wind_params) do
       {:ok, wind} ->
         Task.start(fn -> Email.deliver_welcome(wind) end)
+
         conn
         |> put_flash(:info, "Wind notification created successfully.")
         |> redirect(to: Routes.home_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html",
+          changeset: changeset,
+          location_options: DataSources.get_locations()
+        )
     end
   end
 

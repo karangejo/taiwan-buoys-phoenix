@@ -21,14 +21,13 @@ defmodule TaiwanBuoysWeb.Router do
     post "/view-chart", HomeController, :redirect_chart
     get "/chart/:location", ChartController, :index
 
-    resources "/winds", WindController, only: [:new, :create]
-    resources "/waves", WaveController, only: [:new, :create]
-    get "/delete/winds/:id", WindController, :delete
-    get "/delete/waves/:id", WaveController, :delete
+    # resources "/winds", WindController, only: [:new, :create]
+    # resources "/waves", WaveController, only: [:new, :create]
+    # get "/delete/winds/:id", WindController, :delete
+    # get "/delete/waves/:id", WaveController, :delete
 
-
-    #live "/", PageLive, :index
-    #live "/graph/:location", GraphLive, :show
+    # live "/", PageLive, :index
+    # live "/graph/:location", GraphLive, :show
   end
 
   # Other scopes may use custom stacks.

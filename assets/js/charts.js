@@ -1,11 +1,11 @@
 const Chart = require("chart.js");
 
 var waveCtx = document.getElementById('waveBuoyChart').getContext('2d');
-var waveChart = new Chart(waveCtx, {
+new Chart(waveCtx, {
     data: {
         labels: waveLabels,
         datasets: [
-            {                
+            {
                 type: 'line',
                 borderColor: "rgba(206, 130, 92, 0.6)",
                 label: "Wave Period (seconds)",
@@ -27,7 +27,7 @@ var waveChart = new Chart(waveCtx, {
         tooltips: {
             mode: "label"
         },
-        resposive: true,
+        responsive: true,
         maintainAspectRatio: false,
         title: {
             display: true,
@@ -77,7 +77,7 @@ var waveChart = new Chart(waveCtx, {
 })
 
 var windCtx = document.getElementById('windBuoyChart').getContext('2d');
-var windChart = new Chart(windCtx, {
+new Chart(windCtx, {
     type: 'bar',
     data: {
         labels: windLabels,
@@ -92,7 +92,7 @@ var windChart = new Chart(windCtx, {
         ]
     },
     options: {
-        resposive: true,
+        responsive: true,
         maintainAspectRatio: false,
         title: {
             display: true,
@@ -132,7 +132,7 @@ var windChart = new Chart(windCtx, {
 
 
 var tideCtx = document.getElementById('tideChart').getContext('2d');
-var tideChart = new Chart(tideCtx, {
+new Chart(tideCtx, {
     type: 'line',
     data: {
         labels: tideLabels,
@@ -148,7 +148,7 @@ var tideChart = new Chart(tideCtx, {
         ]
     },
     options: {
-        resposive: true,
+        responsive: true,
         maintainAspectRatio: false,
         title: {
             display: true,
@@ -183,7 +183,7 @@ var tideChart = new Chart(tideCtx, {
 
 
 var wavePredCtx = document.getElementById('wavePredChart').getContext('2d');
-var wavePredChart = new Chart(wavePredCtx, {
+new Chart(wavePredCtx, {
     data: {
         labels: predLabels,
         datasets: [
@@ -209,7 +209,7 @@ var wavePredChart = new Chart(wavePredCtx, {
         tooltips: {
             mode: "label"
         },
-        resposive: true,
+        responsive: true,
         maintainAspectRatio: false,
         title: {
             display: true,
@@ -260,7 +260,7 @@ var wavePredChart = new Chart(wavePredCtx, {
 
 
 var windPredCtx = document.getElementById('windPredChart').getContext('2d');
-var windPredChart = new Chart(windPredCtx, {
+new Chart(windPredCtx, {
     type: 'bar',
     data: {
         labels: predLabels,
@@ -274,7 +274,7 @@ var windPredChart = new Chart(windPredCtx, {
         ]
     },
     options: {
-        resposive: true,
+        responsive: true,
         maintainAspectRatio: false,
         title: {
             display: true,

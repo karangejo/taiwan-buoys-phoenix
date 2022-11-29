@@ -5,8 +5,7 @@ defmodule TaiwanBuoys.BuoyDataServer do
   """
   use GenServer
 
-  alias TaiwanBuoys.Scraper
-  alias TaiwanBuoys.Email
+  alias TaiwanBuoys.{Scraper, Email, DataSources}
 
   # Client
 
@@ -39,23 +38,29 @@ defmodule TaiwanBuoys.BuoyDataServer do
 
   @impl true
   def handle_continue(:initialize, current_data) do
-      case System.get_env("DEV_ENV") do
-        "local" ->
-          buoy_data = Scraper.get_sample_taitung_data()
-          updated_data = Map.put(current_data, "taitung", buoy_data)
-          {:noreply, updated_data }
+    case Mix.env() do
+      :dev ->
+        buoy_data = Scraper.get_sample_taitung_data()
+        updated_data = Map.put(current_data, "taitung", buoy_data)
+        {:noreply, updated_data}
 
-        _ ->
-          Task.start(fn -> Scraper.get_all_buoy_data(&__MODULE__.put_data_location/2, &Email.check_wave_notifications/2, &Email.check_wind_notifications/2) end)
+      _ ->
+        Task.start(fn ->
+          Scraper.get_all_buoy_data(
+            &__MODULE__.put_data_location/2,
+            &Email.check_wave_notifications/2,
+            &Email.check_wind_notifications/2
+          )
+        end)
 
-          updated_data =
-            Enum.map(Scraper.get_locations, fn x ->
-              {x, []}
-            end)
-            |> Enum.into(%{})
+        updated_data =
+          Enum.map(DataSources.get_locations(), fn x ->
+            {x, []}
+          end)
+          |> Enum.into(%{})
 
-          {:noreply, updated_data}
-      end
+        {:noreply, updated_data}
+    end
   end
 
   @impl true

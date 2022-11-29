@@ -12,5 +12,4 @@ defmodule TaiwanBuoys.Tide.TideData do
   def from_map(atom_map) do
     struct(%__MODULE__{}, atom_map)
   end
-
 end

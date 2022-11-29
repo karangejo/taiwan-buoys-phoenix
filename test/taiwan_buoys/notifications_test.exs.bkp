@@ -6,9 +6,9 @@ defmodule TaiwanBuoys.NotificationsTest do
   describe "winds" do
     alias TaiwanBuoys.Notifications.Wind
 
-    @valid_attrs %{email: "some email", kts_greater_than: 42}
-    @update_attrs %{email: "some updated email", kts_greater_than: 43}
-    @invalid_attrs %{email: nil, kts_greater_than: nil}
+    @valid_attrs %{"location" => "taitung", "email" => "some email", "kts_greater_than" => 42}
+    @update_attrs %{"email" => "some updated email", "kts_greater_than" => 43}
+    @invalid_attrs %{"email" => nil, "kts_greater_than" => nil}
 
     def wind_fixture(attrs \\ %{}) do
       {:ok, wind} =
@@ -67,9 +67,9 @@ defmodule TaiwanBuoys.NotificationsTest do
   describe "waves" do
     alias TaiwanBuoys.Notifications.Wave
 
-    @valid_attrs %{email: "some email", swell_greater_than: 42}
-    @update_attrs %{email: "some updated email", swell_greater_than: 43}
-    @invalid_attrs %{email: nil, swell_greater_than: nil}
+    @valid_attrs %{"location" => "taitung", "email" => "some email", "swell_greater_than" => 42}
+    @update_attrs %{"email" => "some updated email", "swell_greater_than" => 43}
+    @invalid_attrs %{"email" => nil, "swell_greater_than" => nil}
 
     def wave_fixture(attrs \\ %{}) do
       {:ok, wave} =

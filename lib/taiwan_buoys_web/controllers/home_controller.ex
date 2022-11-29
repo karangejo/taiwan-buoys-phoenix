@@ -1,12 +1,13 @@
 defmodule TaiwanBuoysWeb.HomeController do
   use TaiwanBuoysWeb, :controller
 
-  alias TaiwanBuoys.Scraper
+  alias TaiwanBuoys.DataSources
 
   def index(conn, _params) do
-    locations =  Scraper.get_locations
+    locations = DataSources.get_locations()
+
     conn
-    |> assign(:location, hd locations )
+    |> assign(:location, hd(locations))
     |> assign(:location_options, locations)
     |> render("index.html")
   end

@@ -1,9 +1,8 @@
 defmodule TaiwanBuoys.Email do
-
   @wave_wait_period 24
   @wind_wait_period 24
   @taiwanbuoys_url "https://taiwanbuoys.com"
-  #@taiwanbuoys_url "http://localhost:4000"
+  # @taiwanbuoys_url "http://localhost:4000"
   @welcome_subject "Hello From Taiwan Buoys!"
   @notification_subject "Notification From Taiwan Buoys!"
 
@@ -18,44 +17,45 @@ defmodule TaiwanBuoys.Email do
   end
 
   def delete_wind_link(wind) do
-    @taiwanbuoys_url <> TaiwanBuoysWeb.Router.Helpers.wind_path(TaiwanBuoysWeb.Endpoint, :delete, wind)
+    @taiwanbuoys_url <>
+      TaiwanBuoysWeb.Router.Helpers.wind_path(TaiwanBuoysWeb.Endpoint, :delete, wind)
   end
 
   def delete_wave_link(wave) do
-    @taiwanbuoys_url <> TaiwanBuoysWeb.Router.Helpers.wave_path(TaiwanBuoysWeb.Endpoint, :delete, wave)
+    @taiwanbuoys_url <>
+      TaiwanBuoysWeb.Router.Helpers.wave_path(TaiwanBuoysWeb.Endpoint, :delete, wave)
   end
 
   def deliver_welcome(%Wave{email: email} = wave) do
-
     email = %Mailman.Email{
       subject: @welcome_subject,
-      from: ZohoMailer.from,
+      from: ZohoMailer.from(),
       to: [email],
-      text: "You have signed up for notifications from taiwanbuoys.com! We will send you max 1 notification a day!\n If you did not sign up for these notifications please unsubscribe by following the link below:\n #{delete_wave_link(wave)}",
+      text:
+        "You have signed up for notifications from taiwanbuoys.com! We will send you max 1 notification a day!\n If you did not sign up for these notifications please unsubscribe by following the link below:\n #{delete_wave_link(wave)}"
     }
 
     ZohoMailer.deliver(email)
   end
 
   def deliver_welcome(%Wind{email: email} = wind) do
-
     email = %Mailman.Email{
       subject: @welcome_subject,
-      from: ZohoMailer.from,
+      from: ZohoMailer.from(),
       to: [email],
-      text: "You have signed up for notifications from taiwanbuoys.com! We will send you max 1 notification a day!\n If you did not sign up for these notifications please unsubscribe by following the link below:\n #{delete_wind_link(wind)}",
+      text:
+        "You have signed up for notifications from taiwanbuoys.com! We will send you max 1 notification a day!\n If you did not sign up for these notifications please unsubscribe by following the link below:\n #{delete_wind_link(wind)}"
     }
 
     ZohoMailer.deliver(email)
   end
 
-
   def send_email(email, :wind_notification, params, location, %Wind{} = wind) do
     email = %Mailman.Email{
       subject: @notification_subject,
-      from: ZohoMailer.from,
+      from: ZohoMailer.from(),
       to: [email],
-      text: wind_email_template(location, params, wind),
+      text: wind_email_template(location, params, wind)
     }
 
     ZohoMailer.deliver(email)
@@ -64,9 +64,9 @@ defmodule TaiwanBuoys.Email do
   def send_email(email, :wave_notification, params, location, %Wave{} = wave) do
     email = %Mailman.Email{
       subject: @notification_subject,
-      from: ZohoMailer.from,
+      from: ZohoMailer.from(),
       to: [email],
-      text: wave_email_template(location, params, wave),
+      text: wave_email_template(location, params, wave)
     }
 
     ZohoMailer.deliver(email)
@@ -119,8 +119,18 @@ defmodule TaiwanBuoys.Email do
     for wave_notification <- Notifications.list_waves_by_location(location) do
       IO.inspect(current_wave_height)
       IO.inspect(wave_notification.swell_greater_than)
-      if wave_notification.swell_greater_than <= String.to_float(current_wave_height) and time_between_last_notification(wave_notification.last_notification) >= @wave_wait_period do
-        send_email(wave_notification.email, :wave_notification, params, location, wave_notification)
+
+      if wave_notification.swell_greater_than <= String.to_float(current_wave_height) and
+           time_between_last_notification(wave_notification.last_notification) >=
+             @wave_wait_period do
+        send_email(
+          wave_notification.email,
+          :wave_notification,
+          params,
+          location,
+          wave_notification
+        )
+
         Notifications.update_wave(wave_notification, %{"last_notification" => DateTime.utc_now()})
       end
     end
@@ -128,8 +138,17 @@ defmodule TaiwanBuoys.Email do
 
   def check_wind_notifications(location, %BuoyData{mean_wind_speed: current_wind_speed} = params) do
     for wind_notification <- Notifications.list_winds_by_location(location) do
-      if wind_notification.kts_greater_than <= current_wind_speed and time_between_last_notification(wind_notification.last_notification)  >= @wind_wait_period do
-        send_email(wind_notification.email, :wind_notification, params, location, wind_notification)
+      if wind_notification.kts_greater_than <= current_wind_speed and
+           time_between_last_notification(wind_notification.last_notification) >=
+             @wind_wait_period do
+        send_email(
+          wind_notification.email,
+          :wind_notification,
+          params,
+          location,
+          wind_notification
+        )
+
         Notifications.update_wind(wind_notification, %{"last_notification" => DateTime.utc_now()})
       end
     end

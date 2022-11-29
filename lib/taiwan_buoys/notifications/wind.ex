@@ -3,10 +3,10 @@ defmodule TaiwanBuoys.Notifications.Wind do
   import Ecto.Changeset
 
   schema "winds" do
-    field :email, :string
-    field :kts_greater_than, :integer
-    field :location, :string
-    field :last_notification, :utc_datetime
+    field(:email, :string)
+    field(:kts_greater_than, :integer)
+    field(:location, :string)
+    field(:last_notification, :utc_datetime)
 
     timestamps()
   end

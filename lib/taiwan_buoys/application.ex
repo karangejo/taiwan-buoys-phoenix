@@ -17,7 +17,7 @@ defmodule TaiwanBuoys.Application do
       # Start a worker by calling: TaiwanBuoys.Worker.start_link(arg)
       # {TaiwanBuoys.Worker, arg}
       TaiwanBuoys.DataSupervisor,
-      TaiwanBuoys.Scheduler,
+      TaiwanBuoys.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

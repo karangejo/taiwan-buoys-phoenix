@@ -3,7 +3,7 @@ defmodule TaiwanBuoysWeb.WaveController do
 
   alias TaiwanBuoys.Notifications
   alias TaiwanBuoys.Notifications.Wave
-  alias TaiwanBuoys.Scraper
+  alias TaiwanBuoys.DataSources
   alias TaiwanBuoys.Email
 
   def index(conn, _params) do
@@ -13,21 +13,24 @@ defmodule TaiwanBuoysWeb.WaveController do
 
   def new(conn, _params) do
     changeset = Notifications.change_wave(%Wave{})
-    locations =  Scraper.get_locations
+    locations = DataSources.get_locations()
     render(conn, "new.html", changeset: changeset, location_options: locations)
   end
 
   def create(conn, %{"wave" => wave_params}) do
-    IO.inspect(wave_params)
     case Notifications.create_wave(wave_params) do
       {:ok, wave} ->
         Task.start(fn -> Email.deliver_welcome(wave) end)
+
         conn
         |> put_flash(:info, "Wave notification created successfully.")
         |> redirect(to: Routes.home_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html",
+          changeset: changeset,
+          location_options: DataSources.get_locations()
+        )
     end
   end
 

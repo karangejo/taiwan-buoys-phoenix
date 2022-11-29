@@ -1,5 +1,4 @@
 defmodule TaiwanBuoys.ZohoMailer do
-
   @from_email "taiwan.buoys.notify@karangejo.com"
 
   def from do
@@ -10,7 +9,6 @@ defmodule TaiwanBuoys.ZohoMailer do
     Mailman.deliver(email, config())
   end
 
-
   def config do
     %Mailman.Context{
       config: %Mailman.SmtpConfig{
@@ -19,10 +17,9 @@ defmodule TaiwanBuoys.ZohoMailer do
         password: System.get_env("ZOHO_TW_BUOYS_PASSWORD"),
         port: 587,
         tls: :always,
-        auth: :always,
+        auth: :always
       },
       composer: %Mailman.EexComposeConfig{}
     }
   end
-
 end
