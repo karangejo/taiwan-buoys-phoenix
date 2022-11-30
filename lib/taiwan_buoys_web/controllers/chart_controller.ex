@@ -18,7 +18,7 @@ defmodule TaiwanBuoysWeb.ChartController do
     |> assign(:location_options, locations)
     |> assign(:data, BuoyDataServer.view_location_data(location))
     |> assign(:tide_data, TideDataServer.view_location_data(location))
-    |> assign(:prediction_data, WeatherDataServer.view_location_data(location))
+    # |> assign(:prediction_data, WeatherDataServer.view_location_data(location))
     |> assign(:wave_title, String.capitalize(location) <> " Wave Data For Last 48hrs")
     |> assign(:wind_title, String.capitalize(location) <> " Wind Data For Last 48hrs")
     |> assign(:tide_title, String.capitalize(location) <> " Tide Data")

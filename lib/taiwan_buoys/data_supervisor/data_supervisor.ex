@@ -13,8 +13,8 @@ defmodule TaiwanBuoys.DataSupervisor do
   def init(_init_arg) do
     children = [
       {BuoyDataServer, []},
-      {TideDataServer, []},
-      {WeatherDataServer, []}
+      {TideDataServer, []}
+      # {WeatherDataServer, []}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

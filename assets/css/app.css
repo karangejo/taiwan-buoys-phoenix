@@ -883,7 +883,7 @@ section .wave {
   left: 0;
   width: 100%;
   height: 50px;
-  background: url("../../priv/static/images/wave-blue.png");
+  background: url("../static/images/wave-blue.png");
   background-size: 700px 50px;
 }
 

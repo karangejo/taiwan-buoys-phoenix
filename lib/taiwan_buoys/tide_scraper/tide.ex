@@ -16,6 +16,7 @@ defmodule TaiwanBuoys.Tide do
         tide_data =
           rows
           |> get_data_from_row()
+          |> Enum.take(-10)
 
         persist_func.(location, tide_data)
     end

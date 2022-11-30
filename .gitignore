@@ -35,3 +35,4 @@ npm-debug.log
 /priv/static/cache_manifest.json
 
 .elixir_ls
+.env

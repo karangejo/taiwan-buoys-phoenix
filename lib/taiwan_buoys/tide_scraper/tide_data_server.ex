@@ -39,22 +39,20 @@ defmodule TaiwanBuoys.TideDataServer do
 
   @impl true
   def handle_continue(:initialize, current_data) do
-    case Mix.env() do
-      :dev ->
-        buoy_data = Tide.get_sample_taitung_data()
-        updated_data = Map.put(current_data, "taitung", buoy_data)
-        {:noreply, updated_data}
+    if Application.get_env(:taiwan_buoys, :local_dev) do
+      buoy_data = Tide.get_sample_taitung_data()
+      updated_data = Map.put(current_data, "taitung", buoy_data)
+      {:noreply, updated_data}
+    else
+      Task.start(fn -> Tide.get_all_tide_data(&__MODULE__.put_data_location/2) end)
 
-      _ ->
-        Task.start(fn -> Tide.get_all_tide_data(&__MODULE__.put_data_location/2) end)
+      updated_data =
+        Enum.map(DataSources.get_locations(), fn x ->
+          {x, []}
+        end)
+        |> Enum.into(%{})
 
-        updated_data =
-          Enum.map(DataSources.get_locations(), fn x ->
-            {x, []}
-          end)
-          |> Enum.into(%{})
-
-        {:noreply, updated_data}
+      {:noreply, updated_data}
     end
   end
 

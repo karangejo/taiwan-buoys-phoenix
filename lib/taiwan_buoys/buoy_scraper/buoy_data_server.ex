@@ -38,28 +38,26 @@ defmodule TaiwanBuoys.BuoyDataServer do
 
   @impl true
   def handle_continue(:initialize, current_data) do
-    case Mix.env() do
-      :dev ->
-        buoy_data = Scraper.get_sample_taitung_data()
-        updated_data = Map.put(current_data, "taitung", buoy_data)
-        {:noreply, updated_data}
+    if Application.get_env(:taiwan_buoys, :local_dev) do
+      buoy_data = Scraper.get_sample_taitung_data()
+      updated_data = Map.put(current_data, "taitung", buoy_data)
+      {:noreply, updated_data}
+    else
+      Task.start(fn ->
+        Scraper.get_all_buoy_data(
+          &__MODULE__.put_data_location/2,
+          &Email.check_wave_notifications/2,
+          &Email.check_wind_notifications/2
+        )
+      end)
 
-      _ ->
-        Task.start(fn ->
-          Scraper.get_all_buoy_data(
-            &__MODULE__.put_data_location/2,
-            &Email.check_wave_notifications/2,
-            &Email.check_wind_notifications/2
-          )
+      updated_data =
+        Enum.map(DataSources.get_locations(), fn x ->
+          {x, []}
         end)
+        |> Enum.into(%{})
 
-        updated_data =
-          Enum.map(DataSources.get_locations(), fn x ->
-            {x, []}
-          end)
-          |> Enum.into(%{})
-
-        {:noreply, updated_data}
+      {:noreply, updated_data}
     end
   end
 

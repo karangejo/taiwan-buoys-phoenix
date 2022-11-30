@@ -182,132 +182,132 @@ new Chart(tideCtx, {
 })
 
 
-var wavePredCtx = document.getElementById('wavePredChart').getContext('2d');
-new Chart(wavePredCtx, {
-    data: {
-        labels: predLabels,
-        datasets: [
-            {
-                type: 'bar',
-                label: "Wave Height (meters)",
-                yAxisID: "wh",
-                data: wavePredHeight,
-                backgroundColor: predColor,
-            },
-            {
-                type: 'line',
-                borderColor: "rgba(206, 130, 92, 0.6)",
-                pointBackgroundColor: predColor,
-                label: "Wave Period (seconds)",
-                yAxisID: "wp",
-                data: wavePredPeriod,
-                pointRadius: 5,
-            },
-        ]
-    },
-    options: {
-        tooltips: {
-            mode: "label"
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-        title: {
-            display: true,
-            text: wavePredTitle
-        },
-        scales: {
-            xAxes: [{
-                type: 'time',
-                time: {
-                    displayFormats: {
-                        hour: 'MMM D h:mm a'
-                    },
-                    tooltipFormat: 'MMM D h:mm a'
-                },
-                ticks: {
-                    callback: function (value, index, values) {
-                        return value + " " + wavePredDirections[index]
-                    }
-                }
-            }],
-            yAxes: [
-                {
-                    id: "wh",
-                    type: "linear",
-                    position: "right",
-                    ticks: {
-                        beginAtZero: true,
-                        callback: function (value, index, values) {
-                            return value + " (m)"
-                        }
-                    }
-                },
-                {
-                    id: "wp",
-                    type: "linear",
-                    position: "left",
-                    ticks: {
-                        beginAtZero: true,
-                        callback: function (value, index, values) {
-                            return value + " (s)"
-                        }
-                    }
-                }
-            ]
-        }
-    }
-})
+// var wavePredCtx = document.getElementById('wavePredChart').getContext('2d');
+// new Chart(wavePredCtx, {
+//     data: {
+//         labels: predLabels,
+//         datasets: [
+//             {
+//                 type: 'bar',
+//                 label: "Wave Height (meters)",
+//                 yAxisID: "wh",
+//                 data: wavePredHeight,
+//                 backgroundColor: predColor,
+//             },
+//             {
+//                 type: 'line',
+//                 borderColor: "rgba(206, 130, 92, 0.6)",
+//                 pointBackgroundColor: predColor,
+//                 label: "Wave Period (seconds)",
+//                 yAxisID: "wp",
+//                 data: wavePredPeriod,
+//                 pointRadius: 5,
+//             },
+//         ]
+//     },
+//     options: {
+//         tooltips: {
+//             mode: "label"
+//         },
+//         responsive: true,
+//         maintainAspectRatio: false,
+//         title: {
+//             display: true,
+//             text: wavePredTitle
+//         },
+//         scales: {
+//             xAxes: [{
+//                 type: 'time',
+//                 time: {
+//                     displayFormats: {
+//                         hour: 'MMM D h:mm a'
+//                     },
+//                     tooltipFormat: 'MMM D h:mm a'
+//                 },
+//                 ticks: {
+//                     callback: function (value, index, values) {
+//                         return value + " " + wavePredDirections[index]
+//                     }
+//                 }
+//             }],
+//             yAxes: [
+//                 {
+//                     id: "wh",
+//                     type: "linear",
+//                     position: "right",
+//                     ticks: {
+//                         beginAtZero: true,
+//                         callback: function (value, index, values) {
+//                             return value + " (m)"
+//                         }
+//                     }
+//                 },
+//                 {
+//                     id: "wp",
+//                     type: "linear",
+//                     position: "left",
+//                     ticks: {
+//                         beginAtZero: true,
+//                         callback: function (value, index, values) {
+//                             return value + " (s)"
+//                         }
+//                     }
+//                 }
+//             ]
+//         }
+//     }
+// })
 
 
-var windPredCtx = document.getElementById('windPredChart').getContext('2d');
-new Chart(windPredCtx, {
-    type: 'bar',
-    data: {
-        labels: predLabels,
-        datasets: [
-            {
-                backgroundColor: predColor,
-                label: "Wind Speed (kts)",
-                yAxisID: "ws",
-                data: windPredSpeed,
-            },
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        title: {
-            display: true,
-            text: windPredTitle
-        },
-        scales: {
-            xAxes: [{
-                type: 'time',
-                time: {
-                    displayFormats: {
-                        hour: 'MMM D h:mm a'
-                    },
-                    tooltipFormat: 'MMM D h:mm a'
-                },
-                ticks: {
-                    callback: function (value, index, values) {
-                        return value + " " + windPredDirections[index]
-                    }
-                }
-            }],
-            yAxes: [
-                {
-                    id: "ws",
-                    type: "linear",
-                    position: "right",
-                    ticks: {
-                        beginAtZero: true,
-                        callback: function (value, index, values) {
-                            return value + " (kts)"
-                        }
-                    }
-                },
-            ]
-        }
-    }
-})
+// var windPredCtx = document.getElementById('windPredChart').getContext('2d');
+// new Chart(windPredCtx, {
+//     type: 'bar',
+//     data: {
+//         labels: predLabels,
+//         datasets: [
+//             {
+//                 backgroundColor: predColor,
+//                 label: "Wind Speed (kts)",
+//                 yAxisID: "ws",
+//                 data: windPredSpeed,
+//             },
+//         ]
+//     },
+//     options: {
+//         responsive: true,
+//         maintainAspectRatio: false,
+//         title: {
+//             display: true,
+//             text: windPredTitle
+//         },
+//         scales: {
+//             xAxes: [{
+//                 type: 'time',
+//                 time: {
+//                     displayFormats: {
+//                         hour: 'MMM D h:mm a'
+//                     },
+//                     tooltipFormat: 'MMM D h:mm a'
+//                 },
+//                 ticks: {
+//                     callback: function (value, index, values) {
+//                         return value + " " + windPredDirections[index]
+//                     }
+//                 }
+//             }],
+//             yAxes: [
+//                 {
+//                     id: "ws",
+//                     type: "linear",
+//                     position: "right",
+//                     ticks: {
+//                         beginAtZero: true,
+//                         callback: function (value, index, values) {
+//                             return value + " (kts)"
+//                         }
+//                     }
+//                 },
+//             ]
+//         }
+//     }
+// })
