@@ -142,7 +142,7 @@
                  date time
               </th>
               <th>
-                tidal height (meters)
+                tidal height (centimeters)
               </th>
               <th>
                 tidal position
@@ -164,12 +164,6 @@
           </table>
         </div>
       </div>
-    </div>
-    <div class="graph-container">
-        <canvas id="wavePredChart"></canvas>
-    </div>
-    <div class="graph-container">
-        <canvas id="windPredChart"></canvas>
     </div>
 </div>
 
