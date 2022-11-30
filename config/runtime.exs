@@ -34,6 +34,9 @@ if config_env() == :prod do
     secret_key_base: secret_key_base,
     server: true
 
+  # Google maps embed key
+  config :taiwan_buoys, :google_maps_embed_key, System.get_env("GOOGLE_MAPS_EMBED_API_KEY")
+
   # ## Using releases
   #
   # If you are doing OTP releases, you need to instruct Phoenix

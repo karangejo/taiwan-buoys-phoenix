@@ -36,8 +36,6 @@ config :phoenix, :json_library, Jason
 # Timezones
 config :elixir, :time_zone_database, Tz.TimeZoneDatabase
 
-# Google maps embed key
-config :taiwan_buoys, :google_maps_embed_key, System.get_env("GOOGLE_MAPS_EMBED_API_KEY")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
