@@ -11,7 +11,7 @@
     <iframe
       style="width: 75vw; height: 55vh;"
       frameborder="0" style="border:0"
-      src="https://www.google.com/maps/embed/v1/place?key=<%= System.get_env("GOOGLE_MAPS_EMBED_API_KEY")%>&q=<%=@lat%>,<%=@lng%>&zoom=10&maptype=satellite" allowfullscreen>
+      src="https://www.google.com/maps/embed/v1/place?key=<%= Application.get_env(:taiwan_buoys, :google_maps_embed_key) %>&q=<%=@lat%>,<%=@lng%>&zoom=10&maptype=satellite" allowfullscreen>
     </iframe>
 
     <div x-data="{ tab: 'chart' }" class="tab-container">
