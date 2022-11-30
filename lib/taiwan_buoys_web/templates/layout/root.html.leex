@@ -15,7 +15,7 @@
     <header>
     <div class="column">
       <%= link to: Routes.home_path(@conn, :index) do %>
-        <img src="/images/lighthouse-transparent.png" alt="lighthouse logo" style="width: 200px; margin-top: 20px;"/>
+        <img src="<%= Routes.static_path(@conn, "/images/lighthouse-transparent.png") %>" alt="lighthouse logo" style="width: 200px; margin-top: 20px;"/>
       <% end %>
     <section>
       <div class="wave wave1"></div>
