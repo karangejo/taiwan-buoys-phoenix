@@ -139,7 +139,7 @@ new Chart(tideCtx, {
         datasets: [
             {
                 fill: true,
-                label: "tide (meters)",
+                label: "tide (centimeters)",
                 yAxisID: "td",
                 data: tideHeight,
                 pointBackgroundColor: tideColor,
@@ -172,7 +172,7 @@ new Chart(tideCtx, {
                     ticks: {
                         beginAtZero: true,
                         callback: function (value, index, values) {
-                            return value + " (m)"
+                            return value + " (cm)"
                         }
                     }
                 },
