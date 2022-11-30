@@ -1,5 +1,0 @@
-<h1>Edit Wind</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.wind_path(@conn, :update, @wind)) %>
-
-<span><%= link "Back", to: Routes.wind_path(@conn, :index) %></span>

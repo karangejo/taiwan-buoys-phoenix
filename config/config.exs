@@ -7,15 +7,6 @@
 # General application configuration
 import Config
 
-config :taiwan_buoys, TaiwanBuoys.Repo,
-  database: "taiwan_buoys_repo",
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost"
-
-config :taiwan_buoys,
-  ecto_repos: [TaiwanBuoys.Repo]
-
 # Configures the endpoint
 config :taiwan_buoys, TaiwanBuoysWeb.Endpoint,
   url: [host: "localhost"],

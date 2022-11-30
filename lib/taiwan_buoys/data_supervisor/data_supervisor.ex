@@ -1,7 +1,7 @@
 defmodule TaiwanBuoys.DataSupervisor do
   use Supervisor
 
-  alias TaiwanBuoys.WeatherDataServer
+  #  alias TaiwanBuoys.WeatherDataServer
   alias TaiwanBuoys.TideDataServer
   alias TaiwanBuoys.BuoyDataServer
 

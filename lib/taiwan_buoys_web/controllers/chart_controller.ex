@@ -4,7 +4,7 @@ defmodule TaiwanBuoysWeb.ChartController do
   alias TaiwanBuoys.BuoyDataServer
   alias TaiwanBuoys.DataSources
   alias TaiwanBuoys.TideDataServer
-  alias TaiwanBuoys.WeatherDataServer
+  #  alias TaiwanBuoys.WeatherDataServer
 
   def index(conn, %{"location" => location}) do
     locations = DataSources.get_locations()

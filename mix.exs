@@ -47,12 +47,7 @@ defmodule TaiwanBuoys.MixProject do
       {:tz, "~> 0.12.0"},
       {:httpoison, "~> 1.8"},
       {:quantum, "~> 3.0"},
-      {:ecto_sql, "~> 3.0"},
-      {:postgrex, ">= 0.0.0"},
-      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
-      {:phoenix_ecto, "~> 4.2"},
-      {:mailman, "~> 0.4.3"},
-      {:ranch, "~> 1.7.1", override: true}
+      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev}
     ]
   end
 

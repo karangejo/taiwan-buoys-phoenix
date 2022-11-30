@@ -5,7 +5,7 @@ defmodule TaiwanBuoys.BuoyDataServer do
   """
   use GenServer
 
-  alias TaiwanBuoys.{Scraper, Email, DataSources}
+  alias TaiwanBuoys.{Scraper, DataSources}
 
   # Client
 
@@ -44,11 +44,7 @@ defmodule TaiwanBuoys.BuoyDataServer do
       {:noreply, updated_data}
     else
       Task.start(fn ->
-        Scraper.get_all_buoy_data(
-          &__MODULE__.put_data_location/2,
-          &Email.check_wave_notifications/2,
-          &Email.check_wind_notifications/2
-        )
+        Scraper.get_all_buoy_data(&__MODULE__.put_data_location/2)
       end)
 
       updated_data =
