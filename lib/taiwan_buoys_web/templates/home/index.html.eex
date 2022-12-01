@@ -11,6 +11,100 @@
     <%= submit "View Buoy Graph" %>
   </form>
 
+  <div x-data="{ tab: 'chart' }" class="tab-container" style="margin-bottom:5rem;">
+    <div class="tab-buttons-container">
+      <div class="tab-button" :class="{ 'active-tab-button': tab === 'chart' }" @click="tab = 'chart'">View Latest Buoy Chart</div>
+      <div class="tab-button" :class="{ 'active-tab-button': tab === 'table' }" @click="tab = 'table'">View Latest Buoy Table</div>
+    </div>
+
+    <div x-show="tab === 'chart'">
+      <div class="graph-container">
+        <canvas id="latestDataWaveChart"></canvas>
+      </div>
+    </div>
+    <div x-show="tab === 'chart'">
+      <div class="graph-container">
+        <canvas id="latestDataWindChart"></canvas>
+      </div>
+    </div>
+
+    <div x-show="tab === 'table'">
+      <h5>Latest Buoy Data Table</h5>
+      <div id="latestBuoyTable" style="overflow-x:auto; width: 75vw; height: 55vh">
+        <table>
+          <tr>
+            <th>
+              date time
+            </th>
+            <th>
+              buoy location
+            </th>
+            <th>
+              wave height (meters)
+            </th>
+            <th>
+              wave direction
+            </th>
+            <th>
+              wave period (seconds)
+            </th>
+            <th>
+              mean wind speed (meters/second)
+            </th>
+            <th>
+              max wind speed (meters/second)
+            </th>
+            <th>
+              wind direction
+            </th>
+          </tr>
+          <%= for row <- @latest_data  do %>
+          <tr>
+            <td>
+                <%= display_date_time(row.date_time) %>
+            </td>
+            <td>
+                <%= row.location %>
+            </td>
+            <td>
+                <%= row.wave_height %>
+            </td>
+            <td>
+                <%= row.wave_direction %>
+            </td>
+            <td>
+                <%= row.wave_period %>
+            </td>
+            <td>
+                <%= row.mean_wind_speed %>
+            </td>
+            <td>
+                <%= row.maximum_wind %>
+            </td>
+            <td>
+                <%= row.wind_direction %>
+            </td>
+<         </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <iframe style="width: 95vw; height: 75vh; margin-bottom: 30px;" width="650" height="450" src="https://embed.windy.com/embed2.html?lat=25.048&lon=121.532&detailLat=25.048&detailLon=121.532&width=650&height=450&zoom=5&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>
 
 </div>
+
+<script type="text/javascript">
+  window.waveLabels = <%= raw(Jason.encode!(chart_labels(@latest_data))) %>
+  window.waveDirections = <%= raw(Jason.encode!(wave_directions(@latest_data))) %>
+  window.waveHeight = <%= raw(Jason.encode!(wave_height(@latest_data))) %>
+  window.wavePeriod = <%= raw(Jason.encode!(wave_period(@latest_data))) %>
+  window.waveTitle = "<%= raw(@wave_title) %>"
+  window.windLabels = <%= raw(Jason.encode!(chart_labels(@latest_data))) %>
+  window.windDirections = <%= raw(Jason.encode!(wind_directions(@latest_data))) %>
+  window.windSpeed = <%= raw(Jason.encode!(wind_speed(@latest_data))) %>
+  window.maxWindSpeed = <%= raw(Jason.encode!(max_wind_speed(@latest_data))) %>
+  window.windTitle = "<%= raw(@wind_title) %>"
+</script>
+<script src='<%= Routes.static_path(@conn, "/assets/home_charts.js") %>' type="text/javascript"></script>

@@ -25,6 +25,10 @@ defmodule TaiwanBuoys.BuoyDataServer do
     GenServer.call(BuoyDataServer, :view_data)
   end
 
+  def view_latest_data_all_buoys do
+    GenServer.call(BuoyDataServer, :view_latest_data_all_buoys)
+  end
+
   def view_location_data(location) do
     GenServer.call(BuoyDataServer, {:view_location_data, location})
   end
@@ -74,7 +78,49 @@ defmodule TaiwanBuoys.BuoyDataServer do
   end
 
   @impl true
+  def handle_call(:view_latest_data_all_buoys, _from, data) do
+    latest_data =
+      DataSources.get_locations()
+      |> Enum.map(fn location ->
+        data
+        |> Map.get(location)
+        |> get_latest()
+        |> case do
+          nil ->
+            nil
+
+          entry ->
+            entry
+            |> Map.put(:location, location)
+        end
+      end)
+      |> Enum.reject(&is_nil/1)
+
+    {:reply, latest_data, data}
+  end
+
+  @impl true
   def handle_call({:view_location_data, location}, _from, data) do
     {:reply, Enum.take(data[location], 48), data}
+  end
+
+  defp get_latest([]), do: nil
+
+  defp get_latest(data) do
+    [first | rest] = data
+
+    first
+    |> case do
+      nil ->
+        nil
+
+      entry ->
+        if entry.wave_height in ["-", "--", ""] do
+          get_latest(rest)
+        else
+          entry
+          |> Map.from_struct()
+        end
+    end
   end
 end
