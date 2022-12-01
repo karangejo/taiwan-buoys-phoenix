@@ -29,7 +29,13 @@ new Chart(waveCtx, {
 	},
 	options: {
 		tooltips: {
-			mode: "label"
+			mode: "label",
+			callbacks: {
+				afterBody: function (x, y) {
+					[a, b] = x
+					return "Wave Direction " + waveDirections[a.index]
+				}
+			}
 		},
 		responsive: true,
 		maintainAspectRatio: false,
@@ -86,6 +92,15 @@ new Chart(windCtx, {
 		]
 	},
 	options: {
+		tooltips: {
+
+			callbacks: {
+				afterBody: function (x, y) {
+					[a, b] = x
+					return "Wind Direction " + windDirections[a.index]
+				}
+			}
+		},
 		responsive: true,
 		maintainAspectRatio: false,
 		title: {
