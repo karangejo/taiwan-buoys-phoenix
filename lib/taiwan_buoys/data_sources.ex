@@ -3,7 +3,7 @@ defmodule TaiwanBuoys.DataSources do
     %{
       name: "taitung",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/MWRA007.html",
-      tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001415.html",
+      tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001407.html",
       longitude: 121.1442,
       latitude: 22.7242
     },
