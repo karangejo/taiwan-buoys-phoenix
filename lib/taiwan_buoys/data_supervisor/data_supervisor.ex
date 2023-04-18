@@ -4,6 +4,7 @@ defmodule TaiwanBuoys.DataSupervisor do
   #  alias TaiwanBuoys.WeatherDataServer
   alias TaiwanBuoys.TideDataServer
   alias TaiwanBuoys.BuoyDataServer
+  alias TaiwanBuoys.ForecastScraper.ForecastDataServer
 
   def start_link(init_arg) do
     Supervisor.start_link(__MODULE__, init_arg, name: __MODULE__)
@@ -13,7 +14,8 @@ defmodule TaiwanBuoys.DataSupervisor do
   def init(_init_arg) do
     children = [
       {BuoyDataServer, []},
-      {TideDataServer, []}
+      {TideDataServer, []},
+      {ForecastDataServer, []}
       # {WeatherDataServer, []}
     ]
 

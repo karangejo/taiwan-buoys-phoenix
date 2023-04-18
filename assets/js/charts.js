@@ -315,3 +315,137 @@ new Chart(tideCtx, {
 //         }
 //     }
 // })
+
+var waveCtx = document.getElementById('waveForecastChart').getContext('2d');
+new Chart(waveCtx, {
+    data: {
+        labels: forecastWaveLabels,
+        datasets: [
+            {
+                type: 'line',
+                borderColor: "rgba(206, 130, 92, 0.6)",
+                label: "Wave Period (seconds)",
+                yAxisID: "wp",
+                data: forecastWavePeriod,
+                pointBackgroundColor: forecastColor,
+                pointRadius: 5,
+            },
+            {
+                type: 'bar',
+                label: "Wave Height (meters)",
+                yAxisID: "wh",
+                data: forecastWaveHeight,
+                backgroundColor: forecastColor,
+            },
+        ]
+    },
+    options: {
+        tooltips: {
+            mode: "label",
+            callbacks: {
+                afterBody: function (x, y) {
+                    [a, b] = x
+                    return "Wave Direction " + forecastWaveDirections[a.index]
+                }
+            }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+            display: true,
+            text: forecastWaveTitle
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        hour: 'MMM D h:mm a'
+                    },
+                    tooltipFormat: 'MMM D h:mm a'
+                },
+            }],
+            yAxes: [
+                {
+                    id: "wh",
+                    type: "linear",
+                    position: "right",
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return value + " (m)"
+                        }
+                    }
+                },
+                {
+                    id: "wp",
+                    type: "linear",
+                    position: "left",
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return value + " (s)"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+})
+
+var windCtx = document.getElementById('windForecastChart').getContext('2d');
+new Chart(windCtx, {
+    type: 'bar',
+    data: {
+        labels: forecastWindLabels,
+        datasets: [
+            {
+                fill: true,
+                label: "Wind Speed (kts)",
+                yAxisID: "ws",
+                data: forecastWindSpeed,
+                backgroundColor: forecastColor,
+            },
+        ]
+    },
+    options: {
+        tooltips: {
+            callbacks: {
+                afterBody: function (x, y) {
+                    [a, b] = x
+                    return "Wind Direction " + forecastWindDirections[a.index]
+                }
+            }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+            display: true,
+            text: forecastWindTitle
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        hour: 'MMM D h:mm a'
+                    },
+                    tooltipFormat: 'MMM D h:mm a'
+                },
+            }],
+            yAxes: [
+                {
+                    id: "ws",
+                    type: "linear",
+                    position: "right",
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return value + " (kts)"
+                        }
+                    }
+                },
+            ]
+        }
+    }
+})

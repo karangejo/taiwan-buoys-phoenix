@@ -144,6 +144,12 @@ defmodule TaiwanBuoysWeb.ChartView do
     end)
   end
 
+  def forecast_wind_speeds(data) do
+    Enum.map(data, fn x ->
+      x.wind_speed
+    end)
+  end
+
   def wind_speed(data) do
     Enum.map(data, fn x ->
       case x.mean_wind_speed do

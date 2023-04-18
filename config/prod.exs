@@ -22,6 +22,10 @@ config :taiwan_buoys, TaiwanBuoys.Scheduler,
     # every 30 minutes update buoys
     {"*/30 * * * *",
      {TaiwanBuoys.Scraper, :get_all_buoy_data, [&TaiwanBuoys.BuoyDataServer.put_data_location/2]}},
+    # every 6 hours update forecast
+    {"*/30 * * * *",
+     {TaiwanBuoys.ForecastScraper.Forecast, :get_all_forecast_data,
+      [&TaiwanBuoys.ForecastScraper.ForecastDataServer.put_data_location/2]}},
     # every day midnight update tides and weather forecast
     {"0 0 * * *",
      {TaiwanBuoys.Tide, :get_all_tide_data, [&TaiwanBuoys.TideDataServer.put_data_location/2]}}

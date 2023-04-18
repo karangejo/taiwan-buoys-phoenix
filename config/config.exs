@@ -20,7 +20,8 @@ config :taiwan_buoys, TaiwanBuoysWeb.Endpoint,
 config :esbuild,
   version: "0.12.18",
   default: [
-    args: ~w(js/app.js js/charts.js js/home_charts.js --bundle --target=es2016 --outdir=../priv/static/assets),
+    args:
+      ~w(js/app.js js/charts.js js/home_charts.js --bundle --target=es2016 --outdir=../priv/static/assets),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
@@ -35,7 +36,6 @@ config :phoenix, :json_library, Jason
 
 # Timezones
 config :elixir, :time_zone_database, Tz.TimeZoneDatabase
-
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

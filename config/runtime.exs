@@ -9,6 +9,8 @@ import Config
 
 # Start the phoenix server if environment is set and running in a  release
 
+config :taiwan_buoys, :local_dev, System.get_env("LOCAL")
+
 if config_env() == :prod do
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
