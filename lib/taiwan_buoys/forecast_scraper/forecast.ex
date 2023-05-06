@@ -37,11 +37,13 @@ defmodule TaiwanBuoys.ForecastScraper.Forecast do
     rows
     |> Enum.map(fn row ->
       {"tr", _, r} = row
-      at = if length(r) == 11, do: 3, else: 2
+      at = if length(r) == 11, do: 2, else: 1
+
+      {"td", _, knots_elem} = Enum.at(r, at)
 
       knots =
-        r
-        |> Enum.at(at)
+        knots_elem
+        |> Enum.at(1)
         |> Floki.text()
 
       r
