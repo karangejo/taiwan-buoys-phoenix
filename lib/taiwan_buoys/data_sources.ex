@@ -2,6 +2,7 @@ defmodule TaiwanBuoys.DataSources do
   @buoy_data [
     %{
       name: "taitung",
+      chinese_name: "台東",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/MWRA007.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001407.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001407C01.html?T=942",
@@ -9,7 +10,17 @@ defmodule TaiwanBuoys.DataSources do
       latitude: 22.7242
     },
     %{
+      name: "chengong",
+      chinese_name: "成功",
+      url: "https://www.cwa.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46761F.html",
+      tide_url: "https://www.cwa.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001402.html",
+      forecast_url: "https://www.cwa.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001402C01.html?T=729",
+      longitude: 121.4201,
+      latitude: 13.1325
+    },
+    %{
       name: "hualien",
+      chinese_name: "花蓮",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46699A.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001506.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001508C01.html?T=17",
@@ -18,6 +29,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "lanyu",
+      chinese_name: "蘭嶼",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/MC6S94.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001416.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001416C02.html?T=709",
@@ -26,6 +38,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "guishandao",
+      chinese_name: "龜山島",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46708A.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T000204.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1000204C01.html?T=756",
@@ -34,6 +47,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "mituo",
+      chinese_name: "美濃",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/MCOMC08.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T400028.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/6402800C01.html?T=741",
@@ -42,6 +56,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "suao",
+      chinese_name: "蘇澳",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46706A.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T000203.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1000203C01.html?T=779",
@@ -50,6 +65,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "penghu",
+      chinese_name: "澎湖",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46735A.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001601.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001602C01.html?T=923",
@@ -58,6 +74,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "matsu",
+      chinese_name: "馬祖",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/MC6W08.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T900702.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/0900701C01.html?T=233",
@@ -66,6 +83,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "kinmen",
+      chinese_name: "金門",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46787A.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T902004.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/0902004C01.html?T=543",
@@ -74,6 +92,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "erluanbi",
+      chinese_name: "鵝鑾鼻",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46759A.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001304.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001304C01.html?T=829",
@@ -82,6 +101,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "xiaoliuqiu",
+      chinese_name: "小琉球",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46714D.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001322.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001322C02.html?T=110",
@@ -90,6 +110,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "hsinchu",
+      chinese_name: "新竹",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46757B.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T000504.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001802C01.html?T=911",
@@ -98,6 +119,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "longdong",
+      chinese_name: "龍洞",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46694A.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T500026.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/6502600C01.html?T=955",
@@ -106,6 +128,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "fuguicape",
+      chinese_name: "富貴角",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/MC6AH2.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T500022.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/6502200C01.html?T=191",
@@ -114,6 +137,7 @@ defmodule TaiwanBuoys.DataSources do
     },
     %{
       name: "pengjiayu",
+      chinese_name: "彭佳嶼",
       url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/MC6B01.html",
       tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T500010.html",
       forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/6502200C01.html?T=191",
