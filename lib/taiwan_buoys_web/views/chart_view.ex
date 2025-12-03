@@ -153,7 +153,7 @@ defmodule TaiwanBuoysWeb.ChartView do
   def wind_speed(data) do
     Enum.map(data, fn x ->
       case x.mean_wind_speed do
-        "--" ->
+        speed when speed in ["--", "", nil, "-"] ->
           "--"
 
         speed ->
