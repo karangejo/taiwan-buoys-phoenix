@@ -6,6 +6,8 @@ defmodule TaiwanBuoys.Scraper do
   alias TaiwanBuoys.DataSources
   alias TaiwanBuoys.Scraper.BuoyData
 
+  require Logger
+
   # Scraper
   def get_all_buoy_data(persist_func) do
     Enum.map(DataSources.buoy_data(), fn x ->
@@ -27,7 +29,11 @@ defmodule TaiwanBuoys.Scraper do
         persist_func.(location, buoy_data)
         buoy_data
 
-      {:error, _} ->
+      {:error, _} = error ->
+        Logger.error(
+          "Error getting buoy data for location: #{location}, error: #{inspect(error)}"
+        )
+
         []
     end
   end
@@ -52,8 +58,8 @@ defmodule TaiwanBuoys.Scraper do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {:ok, Floki.parse_document!(body)}
 
-      _ ->
-        {:error, "could not get rows"}
+      error ->
+        error
     end
   end
 

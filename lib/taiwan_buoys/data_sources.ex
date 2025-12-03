@@ -12,9 +12,9 @@ defmodule TaiwanBuoys.DataSources do
     %{
       name: "chengong",
       chinese_name: "成功",
-      url: "https://www.cwa.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46761F.html",
-      tide_url: "https://www.cwa.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001402.html",
-      forecast_url: "https://www.cwa.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001402C01.html?T=729",
+      url: "https://www.cwb.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46761F.html",
+      tide_url: "https://www.cwb.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001402.html",
+      forecast_url: "https://www.cwb.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001402C01.html?T=729",
       longitude: 121.4201,
       latitude: 13.1325
     },

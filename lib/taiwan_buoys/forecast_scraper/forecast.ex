@@ -2,6 +2,8 @@ defmodule TaiwanBuoys.ForecastScraper.Forecast do
   alias TaiwanBuoys.DataSources
   alias TaiwanBuoys.ForecastScraper.ForecastData
 
+  require Logger
+
   def get_all_forecast_data(persist_func) do
     DataSources.buoy_data()
     |> Enum.map(fn x ->
@@ -18,6 +20,13 @@ defmodule TaiwanBuoys.ForecastScraper.Forecast do
           |> get_data_from_rows()
 
         persist_func.(location, forecast_data)
+
+      error ->
+        Logger.error(
+          "Error getting forecast data for location: #{location}, error: #{inspect(error)}"
+        )
+
+        error
     end
   end
 
@@ -28,8 +37,8 @@ defmodule TaiwanBuoys.ForecastScraper.Forecast do
          body
          |> Floki.parse_document!()}
 
-      _ ->
-        {:error, "could not get rows"}
+      error ->
+        error
     end
   end
 

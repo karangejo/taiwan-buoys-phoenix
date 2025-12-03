@@ -2,6 +2,8 @@ defmodule TaiwanBuoys.Tide do
   alias TaiwanBuoys.Tide.TideData
   alias TaiwanBuoys.DataSources
 
+  require Logger
+
   def get_all_tide_data(persist_func) do
     DataSources.buoy_data()
     |> Enum.map(fn x ->
@@ -19,6 +21,13 @@ defmodule TaiwanBuoys.Tide do
           |> Enum.take(-10)
 
         persist_func.(location, tide_data)
+
+      error ->
+        Logger.error(
+          "Error getting tide data for location: #{location}, error: #{inspect(error)}"
+        )
+
+        error
     end
   end
 
@@ -32,8 +41,8 @@ defmodule TaiwanBuoys.Tide do
 
         {:ok, table_rows}
 
-      _ ->
-        {:error, "could not get rows"}
+      error ->
+        error
     end
   end
 
