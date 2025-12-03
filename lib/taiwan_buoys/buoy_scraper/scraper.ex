@@ -27,6 +27,7 @@ defmodule TaiwanBuoys.Scraper do
           end)
 
         persist_func.(location, buoy_data)
+        Logger.info("Successfully saved buoy data for location: #{location}")
         buoy_data
 
       {:error, _} = error ->

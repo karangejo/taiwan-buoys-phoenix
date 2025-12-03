@@ -21,6 +21,8 @@ defmodule TaiwanBuoys.Tide do
           |> Enum.take(-10)
 
         persist_func.(location, tide_data)
+        Logger.info("Successfully saved tide data for location: #{location}")
+        tide_data
 
       error ->
         Logger.error(

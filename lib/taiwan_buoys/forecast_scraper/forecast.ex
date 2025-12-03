@@ -20,6 +20,8 @@ defmodule TaiwanBuoys.ForecastScraper.Forecast do
           |> get_data_from_rows()
 
         persist_func.(location, forecast_data)
+        Logger.info("Successfully saved forecast data for location: #{location}")
+        forecast_data
 
       error ->
         Logger.error(
