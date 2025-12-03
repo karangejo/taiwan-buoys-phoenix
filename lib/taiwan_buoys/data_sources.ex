@@ -7,7 +7,7 @@ defmodule TaiwanBuoys.DataSources do
       tide_url: "https://www.cwa.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001407.html",
       forecast_url: "https://www.cwa.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001407C01.html?T=942",
       longitude: 121.1442,
-      latitude: 22.7242
+      latitude: 22.7222
     },
     %{
       name: "chengong",
@@ -15,8 +15,8 @@ defmodule TaiwanBuoys.DataSources do
       url: "https://www.cwa.gov.tw/V8/E/M/OBS_Marine/48hrsSeaObs_MOD/M46761F.html",
       tide_url: "https://www.cwa.gov.tw/V8/E/M/Fishery/tide_30day_MOD/T001402.html",
       forecast_url: "https://www.cwa.gov.tw/V8/E/M/TownCoastal/MOD/3hr/1001402C01.html?T=729",
-      longitude: 121.4201,
-      latitude: 13.1325
+      longitude: 121.3799,
+      latitude: 23.0972
     },
     %{
       name: "hualien",
