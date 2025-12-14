@@ -11,7 +11,7 @@ new Chart(waveCtx, {
 			{
 				type: 'line',
 				borderColor: "rgba(206, 130, 92, 0.6)",
-				label: "Wave Period (seconds)",
+				label: wavePeriodSeconds,
 				yAxisID: "wp",
 				data: wavePeriod,
 				pointRadius: 5,
@@ -20,7 +20,7 @@ new Chart(waveCtx, {
 			},
 			{
 				type: 'bar',
-				label: "Wave Height (meters)",
+				label: waveHeightMeters,
 				yAxisID: "wh",
 				data: waveHeight,
 				backgroundColor: background
@@ -84,7 +84,7 @@ new Chart(windCtx, {
 		datasets: [
 			{
 				fill: true,
-				label: "Wind Speed (kts)",
+				label: windSpeedKnots,
 				yAxisID: "ws",
 				data: windSpeed,
 				backgroundColor: background

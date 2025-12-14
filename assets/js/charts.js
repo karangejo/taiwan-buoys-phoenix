@@ -8,7 +8,7 @@ new Chart(waveCtx, {
             {
                 type: 'line',
                 borderColor: "rgba(206, 130, 92, 0.6)",
-                label: "Wave Period (seconds)",
+                label: wavePeriodSeconds,
                 yAxisID: "wp",
                 data: wavePeriod,
                 pointBackgroundColor: buoyColor,
@@ -16,7 +16,7 @@ new Chart(waveCtx, {
             },
             {
                 type: 'bar',
-                label: "Wave Height (meters)",
+                label: waveHeightMeters,
                 yAxisID: "wh",
                 data: waveHeight,
                 backgroundColor: buoyColor,
@@ -85,7 +85,7 @@ new Chart(windCtx, {
         datasets: [
             {
                 fill: true,
-                label: "Wind Speed (kts)",
+                label: windSpeedKnots,
                 yAxisID: "ws",
                 data: windSpeed,
                 backgroundColor: buoyColor,
@@ -143,7 +143,7 @@ new Chart(tideCtx, {
         datasets: [
             {
                 fill: true,
-                label: "tide (centimeters)",
+                label: tideCentimeters,
                 yAxisID: "td",
                 data: tideHeight,
                 pointBackgroundColor: tideColor,
@@ -324,7 +324,7 @@ new Chart(waveCtx, {
             {
                 type: 'line',
                 borderColor: "rgba(206, 130, 92, 0.6)",
-                label: "Wave Period (seconds)",
+                label: wavePeriodSeconds,
                 yAxisID: "wp",
                 data: forecastWavePeriod,
                 pointBackgroundColor: forecastColor,
@@ -332,7 +332,7 @@ new Chart(waveCtx, {
             },
             {
                 type: 'bar',
-                label: "Wave Height (meters)",
+                label: waveHeightMeters,
                 yAxisID: "wh",
                 data: forecastWaveHeight,
                 backgroundColor: forecastColor,
@@ -401,7 +401,7 @@ new Chart(windCtx, {
         datasets: [
             {
                 fill: true,
-                label: "Wind Speed (kts)",
+                label: windSpeedKnots,
                 yAxisID: "ws",
                 data: forecastWindSpeed,
                 backgroundColor: forecastColor,

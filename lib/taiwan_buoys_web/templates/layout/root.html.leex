@@ -13,6 +13,11 @@
   </head>
   <body>
     <header>
+    <div class="row-right">
+      <%= link "English", to: Routes.home_path(@conn, :index, locale: "en") %>
+      /
+      <%= link "中文", to: Routes.home_path(@conn, :index, locale: "zh-TW") %>
+    </div>
     <div class="column">
       <%= link to: Routes.home_path(@conn, :index) do %>
         <img src="<%= Routes.static_path(@conn, "/images/lighthouse-transparent.png") %>" alt="lighthouse logo" style="width: 200px; margin-top: 20px;"/>

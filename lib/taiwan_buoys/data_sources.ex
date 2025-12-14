@@ -148,11 +148,23 @@ defmodule TaiwanBuoys.DataSources do
 
   def buoy_data, do: @buoy_data
 
-  def get_locations, do: Enum.map(@buoy_data, &Map.get(&1, :name))
+  def get_locations(locale \\ "en")
+  def get_locations("en"), do: Enum.map(@buoy_data, &{Map.get(&1, :name), Map.get(&1, :name)})
+  def get_locations("zh-TW"), do: Enum.map(@buoy_data, &{Map.get(&1, :chinese_name), Map.get(&1, :name)})
 
   def get_location_lat_lng(location) do
     %{latitude: lat, longitude: lng} = Enum.find(@buoy_data, fn x -> x.name == location end)
 
     %{lat: lat, lng: lng}
+  end
+
+  def get_location_name(location, "en") do
+    %{name: name} = Enum.find(@buoy_data, fn x -> x.name == location end)
+    String.capitalize(name)
+  end
+
+  def get_location_name(location, "zh-TW") do
+    %{chinese_name: chinese_name} = Enum.find(@buoy_data, fn x -> x.name == location end)
+    chinese_name
   end
 end

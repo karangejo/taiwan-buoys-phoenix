@@ -8,6 +8,7 @@ defmodule TaiwanBuoysWeb.Router do
     plug :put_root_layout, {TaiwanBuoysWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug TaiwanBuoysWeb.Plugs.SetLocale, "en"
   end
 
   pipeline :api do
