@@ -4,7 +4,7 @@ defmodule TaiwanBuoysWeb.Plugs.SetLocale do
 
   @locales ~w(en zh-TW)
 
-  def init(default), do: default
+  def init(default), do: default 
 
   def call(%Plug.Conn{params: %{"locale" => locale}} = conn, _opts) when locale in @locales do
     case get_locale(conn) do
@@ -16,7 +16,7 @@ defmodule TaiwanBuoysWeb.Plugs.SetLocale do
   def call(conn, default_locale) do
     case get_locale(conn) do
       {:ok, _locale} -> conn
-      _ -> put_resp_cookie("locale", default_locale, max_age: 10 * 24 * 60 * 60)
+      _ -> put_resp_cookie(conn, "locale", default_locale, max_age: 10 * 24 * 60 * 60)
     end
   end
 
