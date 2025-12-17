@@ -81,7 +81,7 @@ defmodule TaiwanBuoys.BuoyDataServer do
   def handle_call(:view_latest_data_all_buoys, _from, data) do
     latest_data =
       DataSources.get_locations()
-      |> Enum.map(fn location ->
+      |> Enum.map(fn {location, _} ->
         data
         |> Map.get(location)
         |> get_latest()
