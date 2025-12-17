@@ -13,7 +13,29 @@
       frameborder="0" style="border:0"
       src="https://www.google.com/maps/embed/v1/place?key=<%= Application.get_env(:taiwan_buoys, :google_maps_embed_key) %>&q=<%=@lat%>,<%=@lng%>&zoom=10&maptype=satellite" allowfullscreen>
     </iframe>
-
+    <div>
+        <h4>The colors in the chart represent days of the week</h4>
+        <table>
+          <tr>
+            <th>MON</th>
+            <th>TUE</th>
+            <th>WED</th>
+            <th>THU</th>
+            <th>FRI</th>
+            <th>SAT</th>
+            <th>SUN</th>
+          </tr>
+          <tr>
+            <td style="background-color: blue;"></td>
+            <td style="background-color: green;"></td>
+            <td style="background-color: yellow;"></td>
+            <td style="background-color: orange;"></td>
+            <td style="background-color: red;"></td>
+            <td style="background-color: purple;"></td>
+            <td style="background-color: pink;"></td>
+          </tr>
+        </table>
+    </div>
     <div x-data="{ tab: 'chart' }" class="tab-container">
       <div class="tab-buttons-container">
         <div class="tab-button" :class="{ 'active-tab-button': tab === 'chart' }" @click="tab = 'chart'"><%= @view_chart_label %></div>
@@ -58,10 +80,10 @@
                 maximum wind (meters/second)
               </th>
               <th>
-                water temp celcius
+                water temp celsius
               </th>
               <th>
-                air temp celcius
+                air temp celsius
               </th>
               <th>
                 pressure
