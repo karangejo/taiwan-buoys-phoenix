@@ -150,7 +150,9 @@ defmodule TaiwanBuoys.DataSources do
 
   def get_locations(locale \\ "en")
   def get_locations("en"), do: Enum.map(@buoy_data, &{Map.get(&1, :name), Map.get(&1, :name)})
-  def get_locations("zh-TW"), do: Enum.map(@buoy_data, &{Map.get(&1, :chinese_name), Map.get(&1, :name)})
+
+  def get_locations("zh-TW"),
+    do: Enum.map(@buoy_data, &{Map.get(&1, :chinese_name), Map.get(&1, :name)})
 
   def get_location_lat_lng(location) do
     %{latitude: lat, longitude: lng} = Enum.find(@buoy_data, fn x -> x.name == location end)
