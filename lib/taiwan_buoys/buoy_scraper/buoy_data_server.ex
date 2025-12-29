@@ -105,6 +105,7 @@ defmodule TaiwanBuoys.BuoyDataServer do
   end
 
   defp get_latest([]), do: nil
+  defp get_latest(nil), do: nil
 
   defp get_latest(data) do
     [first | rest] = data

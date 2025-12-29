@@ -100,9 +100,11 @@ defmodule TaiwanBuoys.ForecastScraper.Forecast do
       |> String.split(":")
       |> Enum.map(fn x -> String.to_integer(x) end)
 
-    year =
-      DateTime.utc_now()
-      |> Map.fetch!(:year)
+    now = DateTime.utc_now()
+    current_year = now.year
+    current_month = now.month
+
+    year = if month < current_month, do: current_year + 1, else: current_year
 
     date = Date.new!(year, month, day)
     time = Time.new!(hour, minute, 0)
