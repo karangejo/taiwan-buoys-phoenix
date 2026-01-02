@@ -104,7 +104,12 @@ defmodule TaiwanBuoys.ForecastScraper.Forecast do
     current_year = now.year
     current_month = now.month
 
-    year = if month < current_month, do: current_year + 1, else: current_year
+    year =
+      cond do
+        current_month == 1 and month == 12 -> current_year - 1
+        current_month == 12 and month == 1 -> current_year + 1
+        true -> current_year
+      end
 
     date = Date.new!(year, month, day)
     time = Time.new!(hour, minute, 0)
